@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lelConsoleTest", "lelConsoleTest\lelConsoleTest.csproj", "{804F2D1C-B8AB-44EF-AB16-B9C37ADDB470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LElWPF.Core", "LElWPF.Core\LElWPF.Core.csproj", "{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{804F2D1C-B8AB-44EF-AB16-B9C37ADDB470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{804F2D1C-B8AB-44EF-AB16-B9C37ADDB470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{804F2D1C-B8AB-44EF-AB16-B9C37ADDB470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{804F2D1C-B8AB-44EF-AB16-B9C37ADDB470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1AB45EE6-A41A-4999-87DA-79E1E7E237F3}
+	EndGlobalSection
+EndGlobal
