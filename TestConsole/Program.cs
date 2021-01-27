@@ -13,7 +13,7 @@ namespace TestConsole
 
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(listValues.r);
+                Console.WriteLine(listValues.GetRandomValues().ToString());
             }
             Console.WriteLine(listValues.ToString());
             Console.WriteLine("End");

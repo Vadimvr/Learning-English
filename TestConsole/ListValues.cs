@@ -7,6 +7,7 @@ namespace TestConsole
 {
     class ListValues
     {
+        Random rnd = new Random();
         List<Values> Data;
         CreatesValues createsListValues;
         public ListValues(string path)
@@ -15,14 +16,18 @@ namespace TestConsole
             createsListValues = new CreatesValues();
             CreadeData(path);
         }
-         void CreadeData(string path)
+        void CreadeData(string path)
         {
-            StreamReader sr = new StreamReader(path, Encoding.UTF8);
+            StreamReader sr = File.OpenText(path);
             string s;
             while ((s = sr.ReadLine()) != null)
             {
                 Data.Add(CreatesValues.CredeData(s, path));
             }
+        }
+        public Values GetRandomValues()
+        {
+            return Data[rnd.Next(0, Data.Count)];
         }
         public override string ToString()
         {
