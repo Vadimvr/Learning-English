@@ -114,6 +114,7 @@
                         </TextBlock>
                     </Border>
                     <Ellipse 
+                        Style="{StaticResource EllipseHint}"
                         Grid.Column="4"
                         Visibility="{Binding ButtonVisibility , UpdateSourceTrigger=PropertyChanged}">
                         
