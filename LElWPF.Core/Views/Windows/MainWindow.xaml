@@ -39,6 +39,13 @@
                     Source="pack://application:,,,/Resources/Style/EllipseHintStyle.xaml">
                 </ResourceDictionary>
 
+                <ResourceDictionary
+                    Source="pack://application:,,,/Resources/Style/EnteringAnAnswerStyle.xaml">
+                </ResourceDictionary>
+                <ResourceDictionary
+                    Source="pack://application:,,,/Resources/Style/CheckAnswerStyle.xaml">
+                </ResourceDictionary>
+
 
                 <ResourceDictionary
                     Source="pack://application:,,,/Resources/img/HelpIMG.xaml">
@@ -143,18 +150,26 @@
                             <MouseBinding Command ="{Binding RepeatSoundFileCommand}"  MouseAction="LeftClick"/>
                         </Ellipse.InputBindings>
                     </Ellipse>
-
                 </Grid>
             </Border>
 
 
-            
-            <TextBlock x:Name="EnteringAnAnswer" 
-                       Grid.Row="3" 
-                       Foreground="Green"> run</TextBlock>
-            <Button x:Name="Check"
+            <Border
+                Grid.Row="3"
+                Style="{StaticResource EnteringAnAnswerBorder}"
+                >
+                
+            <TextBox Style="{StaticResource EnteringAnAnswer}" 
+                     Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}" MaxLines="1" MaxLength="37"
+                     > </TextBox>
+            </Border>
+            <Button Style="{StaticResource CheckAnswer}"
+                    Padding="20,5"
+                    FontSize="25"
+                    FontWeight ="Bold"
                     Grid.Row="4" 
-                    Foreground="Green">Сheck</Button>
+                    Foreground="Green"
+                    >Сheck</Button>
             <TextBlock x:Name="Timer"
                        Grid.Row="6" 
                        Foreground="Green"> 00:15</TextBlock>

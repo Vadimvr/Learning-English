@@ -41,8 +41,6 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-
-
         #region Hint
 
         private string _Hint = "Run";
@@ -61,6 +59,13 @@ namespace LElWPF.Core.ViewModels
 
         private Visibility _ButtonVisibility = Visibility.Visible;
         public Visibility ButtonVisibility { get => _ButtonVisibility; set => Set(ref _ButtonVisibility, value); }
+
+        #endregion
+
+        #region TexBoxAnswer
+
+        private string _TexBoxAnswer;
+        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
 
         #endregion
 
@@ -92,6 +97,7 @@ namespace LElWPF.Core.ViewModels
         }
              
         #endregion
+       
 
 
 

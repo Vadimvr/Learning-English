@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="Resources\Style\CheckAnswerStyle.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Resources\Style\MenuItemStyle.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
