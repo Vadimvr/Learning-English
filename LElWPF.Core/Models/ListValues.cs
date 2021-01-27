@@ -30,5 +30,8 @@ namespace LElWPF.Core.Models
         {
             return Data[rnd.Next(0, Data.Count)];
         }
+
+        
     }
 }
+
