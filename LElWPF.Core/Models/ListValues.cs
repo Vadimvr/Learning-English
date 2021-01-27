@@ -7,6 +7,7 @@ namespace LElWPF.Core.Models
 {
     class ListValues
     {
+        Random rnd = new Random();
         List<Values> Data;
         CreatesValues createsListValues;
         public ListValues(string path)
@@ -24,13 +25,9 @@ namespace LElWPF.Core.Models
                 Data.Add(CreatesValues.CredeData(s, path));
             }
         }
-        public void PrintList()
+        public Values GetRandomValues()
         {
-
-            foreach (var item in Data)
-            {
-                Console.WriteLine(item);
-            }
+            return Data[rnd.Next(0, Data.Count)];
         }
     }
 }
