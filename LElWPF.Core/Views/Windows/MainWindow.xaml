@@ -114,7 +114,6 @@
                         </TextBlock>
                     </Border>
                     <Ellipse 
-                       
                         Grid.Column="4"
                         Visibility="{Binding ButtonVisibility , UpdateSourceTrigger=PropertyChanged}">
                         
@@ -125,19 +124,7 @@
                             <MouseBinding Command ="{Binding DisplayHint}"  MouseAction="LeftClick"/>
                         </Ellipse.InputBindings>
                     </Ellipse>
-                    <Button
-                        Visibility="{Binding ButtonVisibility , UpdateSourceTrigger=PropertyChanged}"
-                        Grid.Column="4"
-
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Margin="20"
-                        FontSize="30"
-                        FontWeight="Bold"
-                        Width="50"
-                        Height="50"
-                        Command="{Binding DisplayHint}">
-                    </Button>
+                    
                 </Grid>
             </Border>
 
