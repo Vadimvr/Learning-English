@@ -4,14 +4,14 @@ using System.Text;
 
 namespace LElWPF.Core.Models
 {
-    class PathImgAndSong
+    class PathToMultimedia
     {
         public string PathImg { get; set; }
         public string PathSong { get; set; }
-        public PathImgAndSong(string id, string path)
+        public PathToMultimedia(string id, string path)
         {
-            PathImg = path + @"/img/" + id + ".jpg";
-            PathSong = path + @"/song/" + id + ".mp3";
+            PathImg = path + @"\img\" + id + ".jpg";
+            PathSong = path + @"\song\" + id + ".mp3";
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 
 namespace TestConsole
 {
@@ -6,7 +7,11 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Start");
+            ListValues listValues = new ListValues(@"D:\Test\data.db");
+            listValues.PrintList();
+
+            Console.WriteLine("End");
         }
     }
 }
