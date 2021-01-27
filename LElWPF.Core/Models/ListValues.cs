@@ -27,7 +27,7 @@ namespace LElWPF.Core.Models
             sr.Close();
         }
         public Values GetRandomValues()
-            {
+        {
             return Data[rnd.Next(0, Data.Count)];
         }
     }
