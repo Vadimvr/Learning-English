@@ -27,7 +27,7 @@ namespace LElWPF.Core.Models
                     temp = i + 1; break;
                 }
                
-            }
+                }
 
             //string id = "";
             //string rus = "";
