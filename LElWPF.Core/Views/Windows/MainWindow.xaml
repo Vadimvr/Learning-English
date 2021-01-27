@@ -50,6 +50,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    
+    
     <DockPanel >
         <Menu DockPanel.Dock="Top"  Style="{StaticResource MenuStyle}" >
             <MenuItem Header="Menu"  
@@ -68,6 +70,8 @@
                           Style="{StaticResource MenuItemStyle}"/>
             </MenuItem>
         </Menu>
+        
+        
         <StatusBar 
             DockPanel.Dock="Bottom" 
             Style="{StaticResource StatusBarStyle}">
@@ -75,6 +79,7 @@
                 <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
             </StatusBarItem>
         </StatusBar>
+        
         <Grid>
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -91,7 +96,11 @@
             <Image Style="{StaticResource PictureStyle}" 
                    Source="{Binding ImegePath, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Border  Grid.Row="1">
+            <TextBlock Style="{StaticResource TextBlockQuestion}" 
+                       Text="{Binding Question, UpdateSourceTrigger=PropertyChanged}"
+                       Grid.Row="1"/>
+
+            <Border  Grid.Row="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -103,21 +112,20 @@
                     </Grid.ColumnDefinitions>
 
                     <Border
-                        Style="{StaticResource Promt}"
+                        Style="{StaticResource BorderHint}"
                         Grid.Column="2"
                         Grid.ColumnSpan="2"
                         Visibility="{Binding PromptVisibility , UpdateSourceTrigger=PropertyChanged}">
                         <TextBlock
                             Grid.Column="0"
-                            Style="{StaticResource PromtTextBlock}"
-                            Text="{Binding Prompt, UpdateSourceTrigger=PropertyChanged}">
+                            Style="{StaticResource TextBlockHint}"
+                            Text="{Binding Hint, UpdateSourceTrigger=PropertyChanged}">
                         </TextBlock>
                     </Border>
                     <Ellipse 
                         Style="{StaticResource EllipseHint}"
                         Grid.Column="4"
                         Visibility="{Binding ButtonVisibility , UpdateSourceTrigger=PropertyChanged}">
-                        
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="{StaticResource HelpImageXaml}"/>
                         </Ellipse.Fill>
@@ -125,14 +133,11 @@
                             <MouseBinding Command ="{Binding DisplayHint}"  MouseAction="LeftClick"/>
                         </Ellipse.InputBindings>
                     </Ellipse>
-                    
                 </Grid>
             </Border>
 
 
-            <TextBlock x:Name="transcription"
-                       Grid.Row="2" 
-                       Foreground="Green"> run : [rən]</TextBlock>
+            
             <TextBlock x:Name="EnteringAnAnswer" 
                        Grid.Row="3" 
                        Foreground="Green"> run</TextBlock>

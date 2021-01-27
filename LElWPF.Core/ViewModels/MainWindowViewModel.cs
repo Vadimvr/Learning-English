@@ -34,10 +34,19 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-        #region Prompt
+        #region Question
 
-        private string _Prompt = "run";
-        public string Prompt { get => _Prompt; set => Set(ref _Prompt, value); }
+        private string _Question = "Бежать";
+        public string Question { get => _Question; set => Set(ref _Question, value); }
+
+        #endregion
+
+
+
+        #region Hint
+
+        private string _Hint = "Бежать";
+        public string Hint { get => _Hint; set => Set(ref _Hint, value); }
 
         #endregion
 
