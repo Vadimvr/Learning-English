@@ -17,20 +17,22 @@ namespace TestConsole
         }
          void CreadeData(string path)
         {
-            StreamReader sr = File.OpenText(path);
+            StreamReader sr = new StreamReader(path, Encoding.UTF8);
             string s;
             while ((s = sr.ReadLine()) != null)
             {
                 Data.Add(CreatesValues.CredeData(s, path));
             }
         }
-        public void PrintList()
+        public override string ToString()
         {
-
+            string s = "";
             foreach (var item in Data)
             {
-                Console.WriteLine(item);
+               
+                s += item.ToString();
             }
+            return s;
         }
     }
 }

@@ -20,5 +20,10 @@ namespace TestConsole
             Img= paths.PathImg;
             EngTranscription = transcription;
         }
+
+        public override string ToString()
+        {
+            return Rus + "\t"+ Eng + "\t" + EngTranscription + "\t" +Song + "\t" +Img +"\n";
+        }
     }
 }
