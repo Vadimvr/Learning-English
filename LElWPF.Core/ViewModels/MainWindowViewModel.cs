@@ -67,12 +67,12 @@ namespace LElWPF.Core.ViewModels
 
 
         #region Commands
-        #region DisplayHint
+        #region DisplayHintCommand
 
-        public ICommand DisplayHint { get; }
+        public ICommand DisplayHintCommand { get; }
 
-        private bool CanDisplayHintExecute(object p) => true;
-        private void OnDisplayHintExecuted(object p)
+        private bool CanDisplayHintCommandExecute(object p) => true;
+        private void OnDisplayHintCommandExecuted(object p)
         {
             ButtonVisibility = Visibility.Collapsed;
             PromptVisibility = Visibility.Visible;
@@ -102,7 +102,7 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-            DisplayHint = new LambdaCommand(OnDisplayHintExecuted, CanDisplayHintExecute);
+            DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
         }
     }

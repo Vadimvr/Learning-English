@@ -130,7 +130,7 @@
                             <ImageBrush ImageSource="{StaticResource HelpImageXaml}"/>
                         </Ellipse.Fill>
                         <Ellipse.InputBindings>
-                            <MouseBinding Command ="{Binding DisplayHint}"  MouseAction="LeftClick"/>
+                            <MouseBinding Command ="{Binding DisplayHintCommand}"  MouseAction="LeftClick"/>
                         </Ellipse.InputBindings>
                     </Ellipse>
                     <Ellipse 
