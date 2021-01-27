@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LElWPF.Core", "LElWPF.Core\LElWPF.Core.csproj", "{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LElWPF.Core", "LElWPF.Core\LElWPF.Core.csproj", "{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
