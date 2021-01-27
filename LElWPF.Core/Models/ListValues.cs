@@ -18,7 +18,7 @@ namespace LElWPF.Core.Models
         }
         void CreadeData(string path)
         {
-            StreamReader sr = File.OpenText(path);
+            StreamReader sr = new StreamReader(path, Encoding.UTF8);
             string s;
             while ((s = sr.ReadLine()) != null)
             {
