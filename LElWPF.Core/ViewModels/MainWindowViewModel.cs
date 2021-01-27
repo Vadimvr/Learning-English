@@ -45,7 +45,7 @@ namespace LElWPF.Core.ViewModels
 
         #region Hint
 
-        private string _Hint = "Бежать";
+        private string _Hint = "Run";
         public string Hint { get => _Hint; set => Set(ref _Hint, value); }
 
         #endregion
@@ -77,8 +77,22 @@ namespace LElWPF.Core.ViewModels
             ButtonVisibility = Visibility.Collapsed;
             PromptVisibility = Visibility.Visible;
         }
-      
+
         #endregion
+
+        #region RepeatSoundFileCommand
+
+        public ICommand RepeatSoundFileCommand { get; }
+
+        private bool CanRepeatSoundFileCommandExecute(object p) => true;
+        private void OnRepeatSoundFileCommandExecuted(object p)
+        {
+            //comamnd run
+            Application.Current.Shutdown();
+        }
+             
+        #endregion
+
 
 
 
@@ -88,7 +102,8 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-             DisplayHint = new LambdaCommand(OnDisplayHintExecuted, CanDisplayHintExecute);
+            DisplayHint = new LambdaCommand(OnDisplayHintExecuted, CanDisplayHintExecute);
+            RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
         }
     }
 }

@@ -133,6 +133,17 @@
                             <MouseBinding Command ="{Binding DisplayHint}"  MouseAction="LeftClick"/>
                         </Ellipse.InputBindings>
                     </Ellipse>
+                    <Ellipse 
+                        Style="{StaticResource RepeatSoundFile}" 
+                        Grid.Column="4">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Resources/img/Sound.png"/>
+                        </Ellipse.Fill>
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command ="{Binding RepeatSoundFileCommand}"  MouseAction="LeftClick"/>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
+
                 </Grid>
             </Border>
 
