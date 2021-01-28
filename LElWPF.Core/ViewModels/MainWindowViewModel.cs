@@ -147,11 +147,9 @@ namespace LElWPF.Core.ViewModels
                 FirstRun = false;
                 ButtomTextChexkAnsver = "Check";
             }
-            //comamnd run
-            // Application.Current.Shutdown();
+            
         }
-        //below line move in MainWindowViewModel
-
+        
         #endregion
 
 

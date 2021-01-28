@@ -171,9 +171,6 @@
             <Button Style="{StaticResource CheckAnswer}"
                     Command="{Binding ClickButtonCheckCommand}"
                     Content="{Binding ButtomTextChexkAnsver, UpdateSourceTrigger=PropertyChanged}" 
-                    Padding="20,5"
-                    FontSize="25"
-                    FontWeight ="Bold"
                     Grid.Row="4" 
                     Foreground="Green"
                     ></Button>
