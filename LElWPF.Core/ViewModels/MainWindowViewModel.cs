@@ -1,8 +1,11 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
 using LElWPF.Core.Models;
 using LElWPF.Core.ViewModels.Base;
+using System;
+using System.Media;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LElWPF.Core.ViewModels
 {
@@ -18,6 +21,7 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
+        private MediaPlayer mediaPlayer = new MediaPlayer();
 
         #region Title
         private string _Title = "Learning English language";
@@ -127,8 +131,8 @@ namespace LElWPF.Core.ViewModels
         private bool CanRepeatSoundFileCommandExecute(object p) => true;
         private void OnRepeatSoundFileCommandExecuted(object p)
         {
-            //comamnd run
-            Application.Current.Shutdown();
+            mediaPlayer.Position = TimeSpan.FromSeconds(0);
+            mediaPlayer.Play();
         }
 
         #endregion
@@ -149,6 +153,10 @@ namespace LElWPF.Core.ViewModels
                 ImegePath = RandomValues.Img;
                 Question = RandomValues.Rus;
                 Hint = RandomValues.Eng;
+
+                mediaPlayer.Open(new Uri(RandomValues.Song));
+                mediaPlayer.Play();
+
             }
 
             else
@@ -162,6 +170,8 @@ namespace LElWPF.Core.ViewModels
                     Question = RandomValues.Rus;
                     Hint = RandomValues.Eng;
                     TexBoxAnswer = "";
+                    mediaPlayer.Open(new Uri(RandomValues.Song));
+                    mediaPlayer.Play();
                 }
 
             }

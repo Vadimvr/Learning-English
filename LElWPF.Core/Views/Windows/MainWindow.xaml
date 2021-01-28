@@ -164,9 +164,11 @@
                 >
                 
             <TextBox Style="{StaticResource EnteringAnAnswer}" 
-                     Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}" 
-                     
-                     > </TextBox>
+                     Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding ClickButtonCheckCommand}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
             </Border>
             <Button Style="{StaticResource CheckAnswer}"
                     Command="{Binding ClickButtonCheckCommand}"
