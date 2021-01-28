@@ -98,7 +98,7 @@ namespace LElWPF.Core.ViewModels
 
         #region TexBoxAnswer
 
-        private string _TexBoxAnswer;
+        private string _TexBoxAnswer = "";
         public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
 
         #endregion
@@ -146,10 +146,28 @@ namespace LElWPF.Core.ViewModels
                 FirstStartApp = Visibility.Visible;
                 FirstRun = false;
                 ButtomTextChexkAnsver = "Check";
+                ImegePath = RandomValues.Img;
+                Question = RandomValues.Rus;
+                Hint = RandomValues.Eng;
             }
-            
+
+            else
+            {
+                if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
+                {
+                    ButtonHelpVisibility = Visibility.Visible;
+                    BorderHintVisibility = Visibility.Collapsed;
+                    RandomValues = DataValues.GetRandomValues();
+                    ImegePath = RandomValues.Img;
+                    Question = RandomValues.Rus;
+                    Hint = RandomValues.Eng;
+                    TexBoxAnswer = "";
+                }
+
+            }
+
         }
-        
+
         #endregion
 
 
