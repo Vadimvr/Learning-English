@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LElWPF.Core.Models
 {
-    public class PathToMultimedia
+    class PathToMultimedia
     {
         public string PathImg { get; set; }
         public string PathSong { get; set; }
