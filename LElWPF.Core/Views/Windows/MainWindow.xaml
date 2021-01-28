@@ -101,10 +101,12 @@
             </Grid.RowDefinitions>
 
             <Image Style="{StaticResource PictureStyle}" 
-                   Source="{Binding ImegePath, UpdateSourceTrigger=PropertyChanged}" />
+                   Source="{Binding ImegePath, UpdateSourceTrigger=PropertyChanged}" 
+                   Visibility="{Binding FirstStartApp, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Style="{StaticResource TextBlockQuestion}" 
                        Text="{Binding Question, UpdateSourceTrigger=PropertyChanged}"
+                       Visibility="{Binding FirstStartApp, UpdateSourceTrigger=PropertyChanged}"
                        Grid.Row="1"/>
 
             <Border  Grid.Row="2">
@@ -161,6 +163,7 @@
                 
             <TextBox Style="{StaticResource EnteringAnAnswer}" 
                      Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}" MaxLines="1" MaxLength="37"
+                     
                      > </TextBox>
             </Border>
             <Button Style="{StaticResource CheckAnswer}"
