@@ -9,11 +9,11 @@ namespace LElWPF.Core.Models
     {
         Random rnd = new Random();
         List<Values> Data;
-        CreatesValues createsListValues;
+        
         public ListValues(string path)
         {
             Data = new List<Values>();
-            createsListValues = new CreatesValues();
+            
             CreadeData(path);
         }
         void CreadeData(string path)

@@ -164,6 +164,7 @@
                      > </TextBox>
             </Border>
             <Button Style="{StaticResource CheckAnswer}"
+                    Command="{Binding ClickButtonCheckCommand}"
                     Padding="20,5"
                     FontSize="25"
                     FontWeight ="Bold"

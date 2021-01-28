@@ -1,4 +1,5 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
+using LElWPF.Core.Models;
 using LElWPF.Core.ViewModels.Base;
 using System.Windows;
 using System.Windows.Input;
@@ -7,6 +8,17 @@ namespace LElWPF.Core.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
+        #region DtatValues
+
+        
+        public ListValues DataValues { get ; set ; }
+        public Values RandomValues { get; set; }
+
+        public bool Started { get; set; } = false;
+
+        #endregion
+
+
         #region Title
         private string _Title = "Learning English language";
 
@@ -95,12 +107,22 @@ namespace LElWPF.Core.ViewModels
             //comamnd run
             Application.Current.Shutdown();
         }
-             
+
         #endregion
-       
 
+        #region ClickButtonCheckCommand
 
+        public ICommand ClickButtonCheckCommand { get; }
 
+        private bool CanClickButtonCheckCommandExecute(object p) => true;
+        private void OnClickButtonCheckCommandExecuted(object p)
+        {
+            //comamnd run
+            Application.Current.Shutdown();
+        }
+        //below line move in MainWindowViewModel
+        
+        #endregion
 
 
 
@@ -108,8 +130,13 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
+            DataValues = new ListValues(@"D:\TestDB");
+            RandomValues = DataValues.GetRandomValues();
+            
+            
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
+            ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
         }
     }
 }
