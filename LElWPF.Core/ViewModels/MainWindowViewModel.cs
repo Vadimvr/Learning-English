@@ -14,7 +14,7 @@ namespace LElWPF.Core.ViewModels
         public ListValues DataValues { get ; set ; }
         public Values RandomValues { get; set; }
 
-        public bool Started { get; set; } = false;
+        public bool FirstRun { get; set; } = true;
 
         #endregion
 
@@ -60,11 +60,23 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
+        #region Visibility
+
+        #region FirstStartApp
+
+        private Visibility _FirstStartApp = Visibility.Collapsed;
+        public Visibility FirstStartApp { get => _FirstStartApp; set => Set(ref _FirstStartApp, value); }
+
+        #endregion
+
+
+
         #region BorderHintVisibility
 
         private Visibility _BorderHintVisibility = Visibility.Collapsed;
         public Visibility BorderHintVisibility { get => _BorderHintVisibility; set => Set(ref _BorderHintVisibility, value); }
 
+        #endregion
         #endregion
 
         #region ButtonVisibility
@@ -91,8 +103,9 @@ namespace LElWPF.Core.ViewModels
         private bool CanDisplayHintCommandExecute(object p) => true;
         private void OnDisplayHintCommandExecuted(object p)
         {
+
             ButtonVisibility = Visibility.Collapsed;
-            PromptVisibility = Visibility.Visible;
+            BorderHintVisibility = Visibility.Visible;
         }
 
         #endregion
@@ -117,8 +130,10 @@ namespace LElWPF.Core.ViewModels
         private bool CanClickButtonCheckCommandExecute(object p) => true;
         private void OnClickButtonCheckCommandExecuted(object p)
         {
+            if(FirstRun == true)
+                FirstStartApp = Visibility.Visible;
             //comamnd run
-            Application.Current.Shutdown();
+           // Application.Current.Shutdown();
         }
         //below line move in MainWindowViewModel
         
@@ -130,7 +145,7 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-            DataValues = new ListValues(@"D:\TestDB");
+            DataValues = new ListValues(@"D:\TestDB\", "data.db");
             RandomValues = DataValues.GetRandomValues();
             
             
