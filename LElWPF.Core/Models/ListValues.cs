@@ -10,15 +10,15 @@ namespace LElWPF.Core.Models
         Random rnd = new Random();
         List<Values> Data;
         
-        public ListValues(string path)
+        public ListValues(string path, string dbName)
         {
             Data = new List<Values>();
             
-            CreadeData(path);
+            CreadeData(path, dbName);
         }
-        void CreadeData(string path)
+        void CreadeData(string path, string dbName)
         {
-            StreamReader sr = new StreamReader(path, Encoding.UTF8);
+            StreamReader sr = new StreamReader(path + dbName, Encoding.UTF8);
             string s;
             while ((s = sr.ReadLine()) != null)
             {
