@@ -3,7 +3,8 @@ using LElWPF.Core.Models;
 
 namespace LElWPF.Core.Models
 {
-    public class Tests
+    public class TestTests4
+
     {
         [TestFixture]
         public class PathToMultimedia_Test
