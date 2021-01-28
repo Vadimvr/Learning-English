@@ -60,10 +60,10 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-        #region PromptVisibility
+        #region BorderHintVisibility
 
-        private Visibility _PromptVisibility = Visibility.Collapsed;
-        public Visibility PromptVisibility { get => _PromptVisibility; set => Set(ref _PromptVisibility, value); }
+        private Visibility _BorderHintVisibility = Visibility.Collapsed;
+        public Visibility BorderHintVisibility { get => _BorderHintVisibility; set => Set(ref _BorderHintVisibility, value); }
 
         #endregion
 

@@ -122,7 +122,7 @@
                         Style="{StaticResource BorderHint}"
                         Grid.Column="2"
                         Grid.ColumnSpan="2"
-                        Visibility="{Binding PromptVisibility , UpdateSourceTrigger=PropertyChanged}">
+                        Visibility="{Binding BorderHintVisibility , UpdateSourceTrigger=PropertyChanged}">
                         <TextBlock
                             Grid.Column="0"
                             Style="{StaticResource TextBlockHint}"
