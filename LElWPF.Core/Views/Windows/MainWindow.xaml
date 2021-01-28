@@ -110,9 +110,9 @@
                        Grid.Row="1"/>
 
             <Border  Grid.Row="2">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
+                <Grid >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition ></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -134,7 +134,7 @@
                     <Ellipse 
                         Style="{StaticResource EllipseHint}"
                         Grid.Column="4"
-                        Visibility="{Binding ButtonVisibility , UpdateSourceTrigger=PropertyChanged}">
+                        Visibility="{Binding ButtonHelpVisibility , UpdateSourceTrigger=PropertyChanged}">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="{StaticResource HelpImageXaml}"/>
                         </Ellipse.Fill>
@@ -144,7 +144,8 @@
                     </Ellipse>
                     <Ellipse 
                         Style="{StaticResource RepeatSoundFile}" 
-                        Grid.Column="4">
+                        Grid.Column="4"
+                        Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
                         <Ellipse.Fill>
                             <ImageBrush ImageSource="/Resources/img/Sound.png"/>
                         </Ellipse.Fill>

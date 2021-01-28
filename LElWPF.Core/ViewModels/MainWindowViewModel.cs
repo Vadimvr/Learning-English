@@ -79,10 +79,10 @@ namespace LElWPF.Core.ViewModels
         #endregion
         #endregion
 
-        #region ButtonVisibility
+        #region ButtonHelpVisibility
 
-        private Visibility _ButtonVisibility = Visibility.Visible;
-        public Visibility ButtonVisibility { get => _ButtonVisibility; set => Set(ref _ButtonVisibility, value); }
+        private Visibility _ButtonHelpVisibility = Visibility.Collapsed;
+        public Visibility ButtonHelpVisibility { get => _ButtonHelpVisibility; set => Set(ref _ButtonHelpVisibility, value); }
 
         #endregion
 
@@ -104,7 +104,7 @@ namespace LElWPF.Core.ViewModels
         private void OnDisplayHintCommandExecuted(object p)
         {
 
-            ButtonVisibility = Visibility.Collapsed;
+            ButtonHelpVisibility = Visibility.Collapsed;
             BorderHintVisibility = Visibility.Visible;
         }
 
@@ -131,7 +131,11 @@ namespace LElWPF.Core.ViewModels
         private void OnClickButtonCheckCommandExecuted(object p)
         {
             if(FirstRun == true)
+            {
+                ButtonHelpVisibility = Visibility.Visible;
                 FirstStartApp = Visibility.Visible;
+                FirstRun = false;
+            }
             //comamnd run
            // Application.Current.Shutdown();
         }
