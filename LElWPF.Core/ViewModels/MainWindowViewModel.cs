@@ -10,8 +10,8 @@ namespace LElWPF.Core.ViewModels
     {
         #region DtatValues
 
-        
-        public ListValues DataValues { get ; set ; }
+
+        public ListValues DataValues { get; set; }
         public Values RandomValues { get; set; }
 
         public bool FirstRun { get; set; } = true;
@@ -60,6 +60,15 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
+        #region ButtomTextChexkAnsver
+
+        private string _ButtomTextChexkAnsver = "Click to start";
+        public string ButtomTextChexkAnsver { get => _ButtomTextChexkAnsver; set => Set(ref _ButtomTextChexkAnsver, value); }
+
+        #endregion
+
+
+
         #region Visibility
 
         #region FirstStartApp
@@ -77,13 +86,14 @@ namespace LElWPF.Core.ViewModels
         public Visibility BorderHintVisibility { get => _BorderHintVisibility; set => Set(ref _BorderHintVisibility, value); }
 
         #endregion
-        #endregion
+
 
         #region ButtonHelpVisibility
 
         private Visibility _ButtonHelpVisibility = Visibility.Collapsed;
         public Visibility ButtonHelpVisibility { get => _ButtonHelpVisibility; set => Set(ref _ButtonHelpVisibility, value); }
 
+        #endregion
         #endregion
 
         #region TexBoxAnswer
@@ -130,17 +140,18 @@ namespace LElWPF.Core.ViewModels
         private bool CanClickButtonCheckCommandExecute(object p) => true;
         private void OnClickButtonCheckCommandExecuted(object p)
         {
-            if(FirstRun == true)
+            if (FirstRun == true)
             {
                 ButtonHelpVisibility = Visibility.Visible;
                 FirstStartApp = Visibility.Visible;
                 FirstRun = false;
+                ButtomTextChexkAnsver = "Check";
             }
             //comamnd run
-           // Application.Current.Shutdown();
+            // Application.Current.Shutdown();
         }
         //below line move in MainWindowViewModel
-        
+
         #endregion
 
 
@@ -151,8 +162,8 @@ namespace LElWPF.Core.ViewModels
         {
             DataValues = new ListValues(@"D:\TestDB\", "data.db");
             RandomValues = DataValues.GetRandomValues();
-            
-            
+
+
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
             ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
