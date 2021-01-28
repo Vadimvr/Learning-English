@@ -163,7 +163,7 @@
                 >
                 
             <TextBox Style="{StaticResource EnteringAnAnswer}" 
-                     Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}" MaxLines="1" MaxLength="37"
+                     Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}" 
                      
                      > </TextBox>
             </Border>
