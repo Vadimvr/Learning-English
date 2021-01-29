@@ -167,6 +167,8 @@
                      Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding ClickButtonCheckCommand}" Key="Enter" />
+                        <KeyBinding Command="{Binding DisplayHintCommand}" Key="F1" />
+                        <KeyBinding Command="{Binding RepeatSoundFileCommand}" Key="F2" />
                     </TextBox.InputBindings>
                 </TextBox>
             </Border>

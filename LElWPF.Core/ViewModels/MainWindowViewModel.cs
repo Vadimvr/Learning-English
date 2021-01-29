@@ -152,7 +152,7 @@ namespace LElWPF.Core.ViewModels
                 ButtomTextChexkAnsver = "Check";
                 ImegePath = RandomValues.Img;
                 Question = RandomValues.Rus;
-                Hint = RandomValues.Eng;
+                Hint = RandomValues.Eng + " " + RandomValues.EngTranscription;
 
                 mediaPlayer.Open(new Uri(RandomValues.Song));
                 mediaPlayer.Play();
@@ -168,7 +168,7 @@ namespace LElWPF.Core.ViewModels
                     RandomValues = DataValues.GetRandomValues();
                     ImegePath = RandomValues.Img;
                     Question = RandomValues.Rus;
-                    Hint = RandomValues.Eng;
+                    Hint = RandomValues.Eng +" " +RandomValues.EngTranscription; 
                     TexBoxAnswer = "";
                     mediaPlayer.Open(new Uri(RandomValues.Song));
                     mediaPlayer.Play();
