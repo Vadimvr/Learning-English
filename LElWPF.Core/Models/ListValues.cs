@@ -24,6 +24,7 @@ namespace LElWPF.Core.Models
             {
                 Data.Add(CreatesValues.CredeData(s, path));
             }
+            sr.Close();
         }
         public Values GetRandomValues()
         {
