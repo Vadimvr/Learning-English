@@ -1,6 +1,7 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
 using LElWPF.Core.Models;
 using LElWPF.Core.ViewModels.Base;
+using LElWPF.Core.ViewModels.Windows;
 using System;
 using System.Media;
 using System.Windows;
@@ -11,6 +12,11 @@ namespace LElWPF.Core.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
+
+
+        #region Filed
+
+
         #region DtatValues
 
 
@@ -22,6 +28,7 @@ namespace LElWPF.Core.ViewModels
         #endregion
 
         private MediaPlayer mediaPlayer = new MediaPlayer();
+        IDialogService dialogService = new DefaultDialogService();
 
         #region Title
         private string _Title = "Learning English language";
@@ -70,8 +77,13 @@ namespace LElWPF.Core.ViewModels
         public string ButtomTextChexkAnsver { get => _ButtomTextChexkAnsver; set => Set(ref _ButtomTextChexkAnsver, value); }
 
         #endregion
+        #region TexBoxAnswer
 
+        private string _TexBoxAnswer = "";
+        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
 
+        #endregion
+        #endregion
 
         #region Visibility
 
@@ -100,16 +112,32 @@ namespace LElWPF.Core.ViewModels
         #endregion
         #endregion
 
-        #region TexBoxAnswer
+        #region Commands
+        #region OpenDictionaryCommand
 
-        private string _TexBoxAnswer = "";
-        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
+        public ICommand OpenDictionaryCommand { get; }
 
+        private bool CanOpenDictionaryCommandExecute(object p) => true;
+        private void OnOpenDictionaryCommandExecuted(object p)
+        {
+           
+            try
+            {
+                if (dialogService.OpenFileDialog() == true)
+                {
+                    DataValues = new ListValues(dialogService.Path,dialogService.File);
+                    RandomValues = DataValues.GetRandomValues();
+                    Status = dialogService.FilePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                Status = ex.ToString();
+            }
+        }
+        
         #endregion
 
-
-
-        #region Commands
         #region DisplayHintCommand
 
         public ICommand DisplayHintCommand { get; }
@@ -161,18 +189,18 @@ namespace LElWPF.Core.ViewModels
 
             else
             {
-               // if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
+                // if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
                 //{
-                    ButtonHelpVisibility = Visibility.Visible;
-                    BorderHintVisibility = Visibility.Collapsed;
-                    RandomValues = DataValues.GetRandomValues();
-                    ImegePath = RandomValues.Img;
-                    Question = RandomValues.Rus;
-                    Hint = RandomValues.Eng +" " +RandomValues.EngTranscription; 
-                    TexBoxAnswer = "";
-                    mediaPlayer.Open(new Uri(RandomValues.Song));
-                    mediaPlayer.Play();
-               //}
+                ButtonHelpVisibility = Visibility.Visible;
+                BorderHintVisibility = Visibility.Collapsed;
+                RandomValues = DataValues.GetRandomValues();
+                ImegePath = RandomValues.Img;
+                Question = RandomValues.Rus;
+                Hint = RandomValues.Eng + " " + RandomValues.EngTranscription;
+                TexBoxAnswer = "";
+                mediaPlayer.Open(new Uri(RandomValues.Song));
+                mediaPlayer.Play();
+                //}
             }
         }
         #endregion
@@ -181,10 +209,10 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-            DataValues = new ListValues(@"D:\TestDB\", "data.db");
+            DataValues = new ListValues(@"D:\TestDB\","data.db");
             RandomValues = DataValues.GetRandomValues();
 
-
+            OpenDictionaryCommand = new LambdaCommand(OnOpenDictionaryCommandExecuted, CanOpenDictionaryCommandExecute);
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
             ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
