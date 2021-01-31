@@ -92,6 +92,8 @@ namespace LElWPF.Core.ViewModels
         private Visibility _FirstStartApp = Visibility.Collapsed;
         public Visibility FirstStartApp { get => _FirstStartApp; set => Set(ref _FirstStartApp, value); }
         #endregion
+
+
         #region TexBoxAnswer
 
         private string _TexBoxAnswer = "";
