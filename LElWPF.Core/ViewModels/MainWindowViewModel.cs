@@ -161,8 +161,8 @@ namespace LElWPF.Core.ViewModels
 
             else
             {
-                if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
-                {
+               // if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
+                //{
                     ButtonHelpVisibility = Visibility.Visible;
                     BorderHintVisibility = Visibility.Collapsed;
                     RandomValues = DataValues.GetRandomValues();
@@ -172,15 +172,10 @@ namespace LElWPF.Core.ViewModels
                     TexBoxAnswer = "";
                     mediaPlayer.Open(new Uri(RandomValues.Song));
                     mediaPlayer.Play();
-                }
-
+               //}
             }
-
         }
-
         #endregion
-
-
 
         #endregion
 
