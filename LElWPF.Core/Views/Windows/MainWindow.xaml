@@ -92,12 +92,12 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="200*"/>
-                <RowDefinition Height="50*"/>
-                <RowDefinition Height="60*"/>
-                <RowDefinition Height="58*"/>
-                <RowDefinition Height="63*"/>
-                <RowDefinition Height="20*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <Image Style="{StaticResource PictureStyle}" 
