@@ -77,12 +77,12 @@ namespace LElWPF.Core.ViewModels
         public string ButtomTextChexkAnsver { get => _ButtomTextChexkAnsver; set => Set(ref _ButtomTextChexkAnsver, value); }
 
         #endregion
+
         #region TexBoxAnswer
 
         private string _TexBoxAnswer = "";
         public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
 
-        #endregion
         #endregion
 
         #region Visibility
@@ -91,10 +91,17 @@ namespace LElWPF.Core.ViewModels
 
         private Visibility _FirstStartApp = Visibility.Collapsed;
         public Visibility FirstStartApp { get => _FirstStartApp; set => Set(ref _FirstStartApp, value); }
+        #endregion
+        #region TexBoxAnswer
 
+        private string _TexBoxAnswer = "";
+        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
+
+        
         #endregion
 
 
+        #endregion
 
         #region BorderHintVisibility
 
@@ -103,13 +110,13 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-
         #region ButtonHelpVisibility
 
         private Visibility _ButtonHelpVisibility = Visibility.Collapsed;
         public Visibility ButtonHelpVisibility { get => _ButtonHelpVisibility; set => Set(ref _ButtonHelpVisibility, value); }
 
         #endregion
+      
         #endregion
 
         #region Commands
@@ -186,7 +193,6 @@ namespace LElWPF.Core.ViewModels
                 mediaPlayer.Play();
 
             }
-
             else
             {
                 // if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
