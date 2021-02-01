@@ -60,8 +60,7 @@
     
     
     <DockPanel >
-        <Menu DockPanel.Dock="Top"  
-              Style="{StaticResource MenuStyle}" >
+        <Menu DockPanel.Dock="Top"  Style="{StaticResource MenuStyle}" >
             <MenuItem Header="Menu"  
                       Style="{StaticResource MenuStyle}">
                 <MenuItem Header="Create profile" 
@@ -73,8 +72,7 @@
                 <MenuItem Header="Save profile" 
                           Style="{StaticResource MenuItemStyle}"/>
                 <MenuItem Header="Open dictionary" 
-                          Style="{StaticResource MenuItemStyle}" 
-                          Command="{Binding OpenDictionaryCommand}"/>
+                          Style="{StaticResource MenuItemStyle}" />
                 <MenuItem Header="Сreate a dictionary" 
                           Style="{StaticResource MenuItemStyle}"/>
             </MenuItem>
