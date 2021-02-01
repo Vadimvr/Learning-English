@@ -1,43 +1,48 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
 namespace TestConsole
 {
-    class ListValues
+    class ListValues 
     {
         Random rnd = new Random();
-        List<Values> Data;
-        CreatesValues createsListValues;
-        public ListValues(string path)
+        public List<Values> Data;
+
+        public ListValues(string path, string dbName)
         {
             Data = new List<Values>();
-            createsListValues = new CreatesValues();
-            CreadeData(path);
+
+            CreadeData(path, dbName);
         }
-        void CreadeData(string path)
+        void CreadeData(string path, string dbName)
         {
-            StreamReader sr = File.OpenText(path);
+            StreamReader sr = new StreamReader(path + dbName, Encoding.UTF8);
             string s;
             while ((s = sr.ReadLine()) != null)
             {
                 Data.Add(CreatesValues.CredeData(s, path));
             }
+            sr.Close();
         }
+ 
+
+
+
         public Values GetRandomValues()
         {
             return Data[rnd.Next(0, Data.Count)];
         }
-        public override string ToString()
+
+        public void PrintList()
         {
-            string s = "";
+
             foreach (var item in Data)
             {
-               
-                s += item.ToString();
+                Console.WriteLine(item);
             }
-            return s;
         }
     }
 }

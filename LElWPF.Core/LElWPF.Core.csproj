@@ -35,4 +35,13 @@
     </Page>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\db\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
+  </ItemGroup>
+
 </Project>
