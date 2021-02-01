@@ -1,12 +1,9 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
-using LElWPF.Core.Models;
 using LElWPF.Core.ViewModels.Base;
-using LElWPF.Core.ViewModels.Windows;
 using System;
 using System.Media;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace LElWPF.Core.ViewModels
 {
@@ -138,9 +135,8 @@ namespace LElWPF.Core.ViewModels
         private bool CanDisplayHintCommandExecute(object p) => true;
         private void OnDisplayHintCommandExecuted(object p)
         {
-
-            ButtonHelpVisibility = Visibility.Collapsed;
-            BorderHintVisibility = Visibility.Visible;
+            ButtonVisibility = Visibility.Collapsed;
+            PromptVisibility = Visibility.Visible;
         }
 
         #endregion
@@ -152,33 +148,16 @@ namespace LElWPF.Core.ViewModels
         private bool CanRepeatSoundFileCommandExecute(object p) => true;
         private void OnRepeatSoundFileCommandExecuted(object p)
         {
-            mediaPlayer.Position = TimeSpan.FromSeconds(0);
-            mediaPlayer.Play();
+            //comamnd run
+            Application.Current.Shutdown();
         }
-
+             
         #endregion
+       
 
-        #region ClickButtonCheckCommand
 
-        public ICommand ClickButtonCheckCommand { get; }
 
-        private bool CanClickButtonCheckCommandExecute(object p) => true;
-        private void OnClickButtonCheckCommandExecuted(object p)
-        {
-            if (FirstRun == true)
-            {
-                ButtonHelpVisibility = Visibility.Visible;
-                FirstStartApp = Visibility.Visible;
-                FirstRun = false;
-                ButtomTextChexkAnsver = "Check";
-                ImegePath = RandomValues.Img;
-                Question = RandomValues.Rus;
-                Hint = RandomValues.Eng + " " + RandomValues.EngTranscription;
 
-                mediaPlayer.Open(new Uri(RandomValues.Song));
-                mediaPlayer.Play();
-
-            }
 
             else
             {
@@ -208,7 +187,6 @@ namespace LElWPF.Core.ViewModels
             OpenDictionaryCommand = new LambdaCommand(OnOpenDictionaryCommandExecuted, CanOpenDictionaryCommandExecute);
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
-            ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
         }
     }
 }
