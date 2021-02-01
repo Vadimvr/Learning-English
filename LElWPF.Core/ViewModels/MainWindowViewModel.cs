@@ -1,23 +1,37 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
+using LElWPF.Core.Models;
 using LElWPF.Core.ViewModels.Base;
+using LElWPF.Core.ViewModels.Windows;
+using System;
+using System.Media;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace LElWPF.Core.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+        IDialogService dialogService = new DefaultDialogService();
+
+        #region Filed
+
+
+        #region DtatValues
+
+
+        public ListValues DataValues { get; set; }
+        public Values RandomValues { get; set; }
+
+        public bool FirstRun { get; set; } = true;
+
+        #endregion
+
+
         #region Title
         private string _Title = "Learning English language";
-
-        /// <summary> Title window</summary>
-        public string Title
-        {
-            get => _Title;
-
-            set => Set(ref _Title, value);
-
-        }
+        public string Title { get => _Title; set => Set(ref _Title, value); }
         #endregion
 
         #region Status
@@ -54,15 +68,16 @@ namespace LElWPF.Core.ViewModels
         public string ButtomTextChexkAnsver { get => _ButtomTextChexkAnsver; set => Set(ref _ButtomTextChexkAnsver, value); }
 
         #endregion
-<<<<<<< HEAD
 
         #region TexBoxAnswer
-=======
->>>>>>> 515da51 (Revert "added OpenDictionaryCommand")
 
-        #region ButtonVisibility
 
-<<<<<<< HEAD
+        private string _TexBoxAnswer = "";
+        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
+
+
+        #endregion
+
         #endregion
 
         #region Visibility
@@ -71,25 +86,10 @@ namespace LElWPF.Core.ViewModels
 
         private Visibility _FirstStartApp = Visibility.Collapsed;
         public Visibility FirstStartApp { get => _FirstStartApp; set => Set(ref _FirstStartApp, value); }
-        #endregion
-=======
-        private Visibility _ButtonVisibility = Visibility.Visible;
-        public Visibility ButtonVisibility { get => _ButtonVisibility; set => Set(ref _ButtonVisibility, value); }
->>>>>>> 515da51 (Revert "added OpenDictionaryCommand")
 
-
-        #region TexBoxAnswer
-
-        private string _TexBoxAnswer = "";
-        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
-
-        
         #endregion
 
-        #region TexBoxAnswer
 
-<<<<<<< HEAD
-        #endregion
 
         #region BorderHintVisibility
 
@@ -98,24 +98,44 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
+
         #region ButtonHelpVisibility
 
         private Visibility _ButtonHelpVisibility = Visibility.Collapsed;
         public Visibility ButtonHelpVisibility { get => _ButtonHelpVisibility; set => Set(ref _ButtonHelpVisibility, value); }
 
         #endregion
-      
-        #endregion
-=======
-        private string _TexBoxAnswer;
-        public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
 
         #endregion
-
-
->>>>>>> 515da51 (Revert "added OpenDictionaryCommand")
 
         #region Commands
+
+
+        #region OpenDictionaryCommand
+
+        public ICommand OpenDictionaryCommand { get; }
+
+        private bool CanOpenDictionaryCommandExecute(object p) => true;
+        private void OnOpenDictionaryCommandExecuted(object p)
+        {
+
+            try
+            {
+                if (dialogService.OpenFileDialog() == true)
+                {
+                    DataValues = new ListValues(dialogService.Path, dialogService.File);
+                    RandomValues = DataValues.GetRandomValues();
+                    Status = dialogService.FilePath;
+                }
+            }
+            catch (Exception ex)
+            {
+                Status = ex.ToString();
+            }
+        }
+
+        #endregion
+
         #region DisplayHintCommand
 
         public ICommand DisplayHintCommand { get; }
@@ -123,8 +143,9 @@ namespace LElWPF.Core.ViewModels
         private bool CanDisplayHintCommandExecute(object p) => true;
         private void OnDisplayHintCommandExecuted(object p)
         {
-            ButtonVisibility = Visibility.Collapsed;
-            PromptVisibility = Visibility.Visible;
+
+            ButtonHelpVisibility = Visibility.Collapsed;
+            BorderHintVisibility = Visibility.Visible;
         }
 
         #endregion
@@ -136,24 +157,63 @@ namespace LElWPF.Core.ViewModels
         private bool CanRepeatSoundFileCommandExecute(object p) => true;
         private void OnRepeatSoundFileCommandExecuted(object p)
         {
-            //comamnd run
-            Application.Current.Shutdown();
+            mediaPlayer.Position = TimeSpan.FromSeconds(0);
+            mediaPlayer.Play();
         }
-             
+
         #endregion
-       
 
+        #region ClickButtonCheckCommand
 
+        public ICommand ClickButtonCheckCommand { get; }
 
+        private bool CanClickButtonCheckCommandExecute(object p) => true;
+        private void OnClickButtonCheckCommandExecuted(object p)
+        {
+            if (FirstRun == true)
+            {
+                ButtonHelpVisibility = Visibility.Visible;
+                FirstStartApp = Visibility.Visible;
+                FirstRun = false;
+                ButtomTextChexkAnsver = "Check";
+                ImegePath = RandomValues.Img;
+                Question = RandomValues.Rus;
+                Hint = RandomValues.Eng + " " + RandomValues.EngTranscription;
 
+                mediaPlayer.Open(new Uri(RandomValues.Song));
+                mediaPlayer.Play();
 
+            }
+
+            else
+            {
+                // if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
+                //{
+                ButtonHelpVisibility = Visibility.Visible;
+                BorderHintVisibility = Visibility.Collapsed;
+                RandomValues = DataValues.GetRandomValues();
+                ImegePath = RandomValues.Img;
+                Question = RandomValues.Rus;
+                Hint = RandomValues.Eng + " " + RandomValues.EngTranscription;
+                TexBoxAnswer = "";
+                mediaPlayer.Open(new Uri(RandomValues.Song));
+                mediaPlayer.Play();
+                //}
+            }
+        }
+        #endregion
 
         #endregion
 
         public MainWindowViewModel()
         {
+            DataValues = new ListValues(@"D:\TestDB\", "data.db");
+            RandomValues = DataValues.GetRandomValues();
+
+            OpenDictionaryCommand = new LambdaCommand(OnOpenDictionaryCommandExecuted, CanOpenDictionaryCommandExecute);
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
+            ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
         }
     }
 }
