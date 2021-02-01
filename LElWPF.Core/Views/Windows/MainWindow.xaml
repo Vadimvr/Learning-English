@@ -72,7 +72,8 @@
                 <MenuItem Header="Save profile" 
                           Style="{StaticResource MenuItemStyle}"/>
                 <MenuItem Header="Open dictionary" 
-                          Style="{StaticResource MenuItemStyle}" />
+                          Style="{StaticResource MenuItemStyle}"
+                          Command="{Binding OpenDictionaryCommand}"/>
                 <MenuItem Header="Сreate a dictionary" 
                           Style="{StaticResource MenuItemStyle}"/>
             </MenuItem>
