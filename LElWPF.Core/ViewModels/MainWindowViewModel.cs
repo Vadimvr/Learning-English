@@ -12,7 +12,8 @@ namespace LElWPF.Core.ViewModels
 {
     class MainWindowViewModel : ViewModel
     {
-
+        private MediaPlayer mediaPlayer = new MediaPlayer();
+        IDialogService dialogService = new DefaultDialogService();
 
         #region Filed
 
@@ -27,20 +28,10 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-        private MediaPlayer mediaPlayer = new MediaPlayer();
-        IDialogService dialogService = new DefaultDialogService();
 
         #region Title
         private string _Title = "Learning English language";
-
-        /// <summary> Title window</summary>
-        public string Title
-        {
-            get => _Title;
-
-            set => Set(ref _Title, value);
-
-        }
+        public string Title { get => _Title; set => Set(ref _Title, value); }
         #endregion
 
         #region Status
@@ -77,12 +68,16 @@ namespace LElWPF.Core.ViewModels
         public string ButtomTextChexkAnsver { get => _ButtomTextChexkAnsver; set => Set(ref _ButtomTextChexkAnsver, value); }
 
         #endregion
+
         #region TexBoxAnswer
+
 
         private string _TexBoxAnswer = "";
         public string TexBoxAnswer { get => _TexBoxAnswer; set => Set(ref _TexBoxAnswer, value); }
 
+
         #endregion
+
         #endregion
 
         #region Visibility
@@ -110,9 +105,12 @@ namespace LElWPF.Core.ViewModels
         public Visibility ButtonHelpVisibility { get => _ButtonHelpVisibility; set => Set(ref _ButtonHelpVisibility, value); }
 
         #endregion
+
         #endregion
 
         #region Commands
+
+
         #region OpenDictionaryCommand
 
         public ICommand OpenDictionaryCommand { get; }
@@ -120,12 +118,12 @@ namespace LElWPF.Core.ViewModels
         private bool CanOpenDictionaryCommandExecute(object p) => true;
         private void OnOpenDictionaryCommandExecuted(object p)
         {
-           
+
             try
             {
                 if (dialogService.OpenFileDialog() == true)
                 {
-                    DataValues = new ListValues(dialogService.Path,dialogService.File);
+                    DataValues = new ListValues(dialogService.Path, dialogService.File);
                     RandomValues = DataValues.GetRandomValues();
                     Status = dialogService.FilePath;
                 }
@@ -135,7 +133,7 @@ namespace LElWPF.Core.ViewModels
                 Status = ex.ToString();
             }
         }
-        
+
         #endregion
 
         #region DisplayHintCommand
@@ -209,7 +207,7 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-            DataValues = new ListValues(@"D:\TestDB\","data.db");
+            DataValues = new ListValues(@"D:\TestDB\", "data.db");
             RandomValues = DataValues.GetRandomValues();
 
             OpenDictionaryCommand = new LambdaCommand(OnOpenDictionaryCommandExecuted, CanOpenDictionaryCommandExecute);
