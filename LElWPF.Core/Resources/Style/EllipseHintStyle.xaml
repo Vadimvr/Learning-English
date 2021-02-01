@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style x:Key="EllipseHint" TargetType="Ellipse">
+        <Style.Setters>
+            <Setter Property="Control.VerticalAlignment" Value="Center"/>
+            <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+            <Setter Property="Control.Width" Value="50"/>
+            <Setter Property="Control.Height" Value="50"/>
+            <Setter Property="Control.Margin" Value="20,0,20,0"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Opacity" Value="1"></Setter>
+                <Setter Property="Opacity" Value="1"></Setter>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.7"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="RepeatSoundFile" TargetType="Ellipse" BasedOn="{StaticResource EllipseHint}">
+        <Style.Setters>
+            <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+            <Setter Property="Control.Margin" Value="100,0,20,0"/>
+        </Style.Setters>
+       
+    </Style>
+</ResourceDictionary>

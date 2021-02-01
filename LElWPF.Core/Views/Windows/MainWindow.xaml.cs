@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace lelConsoleTest
+namespace LElWPF.Core
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +23,11 @@ namespace lelConsoleTest
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
