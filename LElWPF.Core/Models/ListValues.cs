@@ -31,7 +31,14 @@ namespace LElWPF.Core.Models
             return Data[rnd.Next(0, Data.Count)];
         }
 
-        
+        public void PrintList()
+        {
+
+            foreach (var item in Data)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }
 
