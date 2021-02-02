@@ -11,6 +11,7 @@ namespace LElWPF.Core.Models
         public string EngTranscription { get; private set; }
         public string Song { get; private set; }
         public string Img { get; private set; }
+        public string Help { get => Eng + " " + EngTranscription;  }
 
         public Values(string[] arr, string path) : this(arr[0], arr[1], arr[2], path) { }
         
