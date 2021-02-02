@@ -103,11 +103,11 @@
             </Grid.RowDefinitions>
 
             <Image Style="{StaticResource PictureStyle}" 
-                   Source="{Binding ImegePath, UpdateSourceTrigger=PropertyChanged}" 
+                   Source="{Binding RandomValues.Img, UpdateSourceTrigger=PropertyChanged}" 
                    Visibility="{Binding FirstStartApp, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBlock Style="{StaticResource TextBlockQuestion}" 
-                       Text="{Binding Question, UpdateSourceTrigger=PropertyChanged}"
+                       Text="{Binding RandomValues.Rus, UpdateSourceTrigger=PropertyChanged}"
                        Visibility="{Binding FirstStartApp, UpdateSourceTrigger=PropertyChanged}"
                        Grid.Row="1"/>
 
@@ -130,7 +130,7 @@
                         <TextBlock
                             Grid.Column="0"
                             Style="{StaticResource TextBlockHint}"
-                            Text="{Binding Hint, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding RandomValues.Help , UpdateSourceTrigger=PropertyChanged}">
                         </TextBlock>
                     </Border>
                     <Ellipse 
