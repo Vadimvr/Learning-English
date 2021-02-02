@@ -1,5 +1,6 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
 using LElWPF.Core.Models;
+using LElWPF.Core.Models.db;
 using LElWPF.Core.ViewModels.Base;
 using LElWPF.Core.ViewModels.Windows;
 using System;
@@ -14,7 +15,7 @@ namespace LElWPF.Core.ViewModels
     {
         private MediaPlayer mediaPlayer = new MediaPlayer();
         IDialogService dialogService = new DefaultDialogService();
-
+        ConectionDB DB;
         #region Filed
 
 
@@ -191,7 +192,7 @@ namespace LElWPF.Core.ViewModels
                 //{
                 ButtonHelpVisibility = Visibility.Visible;
                 BorderHintVisibility = Visibility.Collapsed;
-                RandomValues = DataValues.GetRandomValues();
+                RandomValues = DB.GetRandomValues();
                 ImegePath = RandomValues.Img;
                 Question = RandomValues.Rus;
                 Hint = RandomValues.Eng + " " + RandomValues.EngTranscription;
@@ -207,8 +208,9 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
+            DB = new ConectionDB(@"D:\test\","test.db");
             DataValues = new ListValues(@"D:\TestDB\", "data.db");
-            RandomValues = DataValues.GetRandomValues();
+            RandomValues = DB.GetRandomValues() ;
 
             OpenDictionaryCommand = new LambdaCommand(OnOpenDictionaryCommandExecuted, CanOpenDictionaryCommandExecute);
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);

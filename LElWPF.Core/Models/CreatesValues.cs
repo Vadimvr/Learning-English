@@ -53,7 +53,7 @@ namespace LElWPF.Core.Models
             //    }
             //}
 
-            return new Values(stringFromDB[temp..].Trim(), eng, engT, new PathToMultimedia(eng, path));
+            return new Values(stringFromDB[temp..].Trim(), eng, engT, path);
         }
     }
 }
