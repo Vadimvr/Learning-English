@@ -12,12 +12,14 @@ namespace LElWPF.Core.Models
         public string Song { get; private set; }
         public string Img { get; private set; }
 
-        public Values(string wordRus, string wordEng, string transcription, PathToMultimedia paths)
+        public Values(string[] arr, string path) : this(arr[0], arr[1], arr[2], path) { }
+        
+        public Values(string wordRus, string wordEng, string transcription, string path)
         {
             Rus = wordRus;
             Eng = wordEng;
-            Song = paths.PathSong;
-            Img = paths.PathImg;
+            Song =path + $@"song/{wordEng}.mp3";
+            Img =path + $@"img/{wordEng}.jpg";
             EngTranscription = transcription;
         }
     }

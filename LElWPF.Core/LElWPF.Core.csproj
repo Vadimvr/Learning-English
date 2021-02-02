@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Data\image\Rectangle4.png" />
     <Resource Include="Resources\img\sound.png" />
   </ItemGroup>
