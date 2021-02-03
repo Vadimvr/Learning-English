@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Data\image\Rectangle4.png" />
     <None Remove="Views\Windows\help.svg" />
     <None Remove="Views\Windows\sound.png" />
   </ItemGroup>
@@ -22,11 +21,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Data\image\Rectangle4.png" />
-    <Resource Include="Resources\img\sound.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +32,15 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\image\" />
+    <Folder Include="Resources\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Windows\sound.png" />
   </ItemGroup>
 
 </Project>

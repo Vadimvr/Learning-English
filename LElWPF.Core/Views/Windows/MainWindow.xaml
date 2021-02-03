@@ -149,11 +149,11 @@
                         Grid.Column="4"
                         Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Resources/img/Sound.png"/>
+                            <ImageBrush ImageSource="/Views/Windows/sound.png"/>
                         </Ellipse.Fill>
-                        <Ellipse.InputBindings>
+                        <!--<Ellipse.InputBindings>
                             <MouseBinding Command ="{Binding RepeatSoundFileCommand}"  MouseAction="LeftClick"/>
-                        </Ellipse.InputBindings>
+                        </Ellipse.InputBindings>-->
                     </Ellipse>
                 </Grid>
             </Border>

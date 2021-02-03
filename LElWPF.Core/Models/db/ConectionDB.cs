@@ -1,8 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace LElWPF.Core.Models.db
 {
     class ConectionDB
@@ -11,18 +8,16 @@ namespace LElWPF.Core.Models.db
         public SqliteConnectionStringBuilder connectionStringBuilder { get; set; }
         string PathDB { get; set; }
         string NameDB { get; set; }
-        public int SatrtIndex { get; set; } = 0;
+        public int SatrtIndex { get; set; } = 1;
         public int EndIndex { get; set; }
         public ConectionDB(string path, string dbname)
         {
             PathDB = path;
             NameDB = dbname;
             connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = PathDB+ NameDB;
+            connectionStringBuilder.DataSource = PathDB + NameDB;
             //connectionStringBuilder.DataSource = @"D:\test\test.db";
             GetCountDB();
-            Values values = GetRandomValues();
-            values = GetRandomValues();
         }
         void GetCountDB()
         {
@@ -40,28 +35,39 @@ namespace LElWPF.Core.Models.db
         public Values GetRandomValues()
         {
             string[] temp;
-            int random = rnd.Next(SatrtIndex, EndIndex);
-            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            //int random = rnd.Next(SatrtIndex, EndIndex); 
+
+            int random = SatrtIndex++;
+            try
             {
+                using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+                {
 
-                connection.Open();
+                    connection.Open();
 
-                var rus = connection.CreateCommand();
-                rus.CommandText = $"SELECT rus FROM Values1 WHERE id={random}";
+                    var rus = connection.CreateCommand();
+                    rus.CommandText = $"SELECT rus FROM Values1 WHERE id={random}";
 
-                var eng = connection.CreateCommand();
-                eng.CommandText = $"SELECT eng FROM Values1 WHERE id={random}";
-               
-                var engt = connection.CreateCommand();
-                engt.CommandText = $"SELECT engt FROM Values1 WHERE id={random}";
-                
-                temp = new string[]{
+                    var eng = connection.CreateCommand();
+                    eng.CommandText = $"SELECT eng FROM Values1 WHERE id={random}";
+
+                    var engt = connection.CreateCommand();
+                    engt.CommandText = $"SELECT engt FROM Values1 WHERE id={random}";
+
+                    temp = new string[]{
                     rus.ExecuteScalar().ToString(),
                     eng.ExecuteScalar().ToString(),
                     engt.ExecuteScalar().ToString()};
-                connection.Close();
+                    connection.Close();
+                }
+                return new Values(temp, PathDB);
             }
-            return new Values(temp,PathDB);
+            catch
+            {
+                SatrtIndex = 1;
+                return new Values("a", "a", "a", PathDB);
+            }
+
         }
 
     }

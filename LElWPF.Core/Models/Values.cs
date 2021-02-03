@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LElWPF.Core.Models
+﻿namespace LElWPF.Core.Models
 {
     class Values
     {
@@ -19,8 +15,8 @@ namespace LElWPF.Core.Models
         {
             Rus = wordRus;
             Eng = wordEng;
-            Song =path + $@"song/{wordEng}.mp3";
-            Img =path + $@"img/{wordEng}.jpg";
+            Song =path + $@"song\{wordEng}.mp3";
+            Img =path + $@"img\{wordEng}.jpg";
             EngTranscription = transcription;
         }
     }

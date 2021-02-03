@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LElWPF.Core.ViewModels.Windows
+﻿namespace LElWPF.Core.ViewModels.Windows
 {
     public interface IDialogService
     {

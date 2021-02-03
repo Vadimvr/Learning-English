@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LElWPF.Core.Models
+﻿namespace LElWPF.Core.Models
 {
     internal class CreatesValues
     {
@@ -28,31 +24,6 @@ namespace LElWPF.Core.Models
                 }
                
             }
-
-            //string id = "";
-            //string rus = "";
-            //string eng = "";
-            //int temp = 0;
-            //for (int i = 0; i < stringFromDB.Length; i++)
-            //{
-            //    if (stringFromDB[i] == '\t' && id == "")
-            //    {
-            //        id = stringFromDB.Substring(temp, i);
-            //        temp = i + 1;
-            //    }
-            //    else if (stringFromDB[i] == '\t' && rus == "")
-            //    {
-            //        rus = stringFromDB.Substring(temp, i - temp);
-            //        temp = i + 1;
-            //    }
-            //    else if (stringFromDB[i] == '\t' && eng == "")
-            //    {
-            //        eng = stringFromDB.Substring(temp, i - temp);
-            //        temp = i + 1;
-            //        break;
-            //    }
-            //}
-
             return new Values(stringFromDB[temp..].Trim(), eng, engT, path);
         }
     }

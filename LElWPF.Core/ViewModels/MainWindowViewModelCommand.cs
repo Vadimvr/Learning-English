@@ -1,13 +1,7 @@
-﻿using LElWPF.Core.Infrastructure.Commands;
-using LElWPF.Core.Models;
-using LElWPF.Core.Models.db;
-using LElWPF.Core.ViewModels.Base;
-using LElWPF.Core.ViewModels.Windows;
+﻿using LElWPF.Core.ViewModels.Base;
 using System;
-using System.Media;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace LElWPF.Core.ViewModels
 {
@@ -62,8 +56,8 @@ namespace LElWPF.Core.ViewModels
         private bool CanRepeatSoundFileCommandExecute(object p) => true;
         private void OnRepeatSoundFileCommandExecuted(object p)
         {
-            mediaPlayer.Position = TimeSpan.FromSeconds(0);
-            mediaPlayer.Play();
+            //mediaPlayer.Position = TimeSpan.FromSeconds(0);
+            //mediaPlayer.Play();
         }
 
         #endregion
@@ -81,8 +75,8 @@ namespace LElWPF.Core.ViewModels
                 FirstStartApp = Visibility.Visible;
                 FirstRun = false;
                 ButtomTextChexkAnsver = "Check";
-                mediaPlayer.Open(new Uri(RandomValues.Song));
-                mediaPlayer.Play();
+                //mediaPlayer.Open(new Uri(RandomValues.Song));
+                //mediaPlayer.Play();
             }
 
             else
@@ -93,6 +87,7 @@ namespace LElWPF.Core.ViewModels
                 BorderHintVisibility = Visibility.Collapsed;
                 RandomValues = DB.GetRandomValues();
                 TexBoxAnswer = "";
+                mediaPlayer.Stop();
                 mediaPlayer.Open(new Uri(RandomValues.Song));
                 mediaPlayer.Play();
                 //}

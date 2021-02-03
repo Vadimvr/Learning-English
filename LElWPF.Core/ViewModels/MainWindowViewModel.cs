@@ -1,13 +1,7 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
-using LElWPF.Core.Models;
 using LElWPF.Core.Models.db;
 using LElWPF.Core.ViewModels.Base;
-using LElWPF.Core.ViewModels.Windows;
-using System;
-using System.Media;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Media;
+
 
 namespace LElWPF.Core.ViewModels
 {
