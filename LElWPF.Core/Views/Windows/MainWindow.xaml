@@ -50,15 +50,15 @@
                 <ResourceDictionary
                     Source="pack://application:,,,/Resources/img/HelpIMG.xaml">
                 </ResourceDictionary>
-                
+
                 <ResourceDictionary>
                     <cmd:CloseApplicationCommand x:Key="CloseAppCommand"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    
-    
+
+
     <DockPanel >
         <Menu DockPanel.Dock="Top"  
               Style="{StaticResource MenuStyle}" >
@@ -79,8 +79,8 @@
                           Style="{StaticResource MenuItemStyle}"/>
             </MenuItem>
         </Menu>
-        
-        
+
+
         <StatusBar 
             DockPanel.Dock="Bottom" 
             Style="{StaticResource StatusBarStyle}">
@@ -88,7 +88,7 @@
                 <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
             </StatusBarItem>
         </StatusBar>
-        
+
         <Grid>
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -149,11 +149,11 @@
                         Grid.Column="4"
                         Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Views/Windows/sound.png"/>
+                            <ImageBrush ImageSource="/Data/image/sound.png"/>
                         </Ellipse.Fill>
-                        <!--<Ellipse.InputBindings>
+                        <Ellipse.InputBindings>
                             <MouseBinding Command ="{Binding RepeatSoundFileCommand}"  MouseAction="LeftClick"/>
-                        </Ellipse.InputBindings>-->
+                        </Ellipse.InputBindings>
                     </Ellipse>
                 </Grid>
             </Border>
@@ -164,8 +164,8 @@
                 Style="{StaticResource EnteringAnAnswerBorder}"
                 Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}"
                 >
-                
-            <TextBox Style="{StaticResource EnteringAnAnswer}" 
+
+                <TextBox Style="{StaticResource EnteringAnAnswer}" 
                      Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding ClickButtonCheckCommand}" Key="Enter" />
