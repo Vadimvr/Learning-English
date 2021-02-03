@@ -1,7 +1,7 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
 using LElWPF.Core.Models.db;
 using LElWPF.Core.ViewModels.Base;
-
+using LElWPF.Core.Views.Windows;
 
 namespace LElWPF.Core.ViewModels
 {
@@ -9,6 +9,9 @@ namespace LElWPF.Core.ViewModels
     {
         public MainWindowViewModel()
         {
+
+            
+            OpenDatabaseWindowCommand = new LambdaCommand(OnOpenDatabaseWindowCommandExecuted, CanOpenDatabaseWindowCommandExecute);
             DB = new ConectionDB(@"D:\test\","test.db");
             RandomValues = DB.GetRandomValues();
             OpenDictionaryCommand = new LambdaCommand(OnOpenDictionaryCommandExecuted, CanOpenDictionaryCommandExecute);

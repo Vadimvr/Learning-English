@@ -2,12 +2,27 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using LElWPF.Core.Views.Windows;
 
 namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
         #region Commands
+        #region OpenSeconWindowCommand
+
+        public ICommand OpenDatabaseWindowCommand { get; }
+
+        private bool CanOpenDatabaseWindowCommandExecute(object p) => true;
+        private void OnOpenDatabaseWindowCommandExecuted(object p)
+        {
+            Views.Windows.DatabaseWindow databaseWindow =new  Views.Windows.DatabaseWindow();
+            databaseWindow.Show();
+        }
+       
+        #endregion
+
+
 
 
         #region OpenDictionaryCommand
