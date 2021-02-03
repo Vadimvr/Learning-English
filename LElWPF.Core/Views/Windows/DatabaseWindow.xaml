@@ -11,6 +11,31 @@
         <vmDB:DatabaseWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <!--<ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>-->
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0" Header="Группы">
+            <ListBox ItemsSource="{Binding AllDB}" SelectedIndex="0"
+                                 DisplayMemberPath="NameTable"
+                                 SelectedItem="{Binding SelectedTable}"/>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Header="{Binding SelectedTable.NameTable, FallbackValue='Значения', TargetNullValue='Таблица не выбрана'}">
+            <DataGrid ItemsSource="{Binding SelectedTable.Values}" 
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  GridLinesVisibility="Vertical"
+                                  VerticalGridLinesBrush="DarkGray"
+                                  AlternatingRowBackground="LightGray">
+                <!-- HorizontalGridLinesBrush="{x:Null}" -->
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="English" Binding="{Binding Eng }"  IsReadOnly="True" Width="1*"/>
+                    <DataGridTextColumn Header="Transcription" Binding="{Binding EngTranscription}" Width="1*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Русский" Binding="{Binding Rus}" IsReadOnly="True" Width="1*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
     </Grid>
 </Window>
