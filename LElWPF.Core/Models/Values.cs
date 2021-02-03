@@ -2,11 +2,11 @@
 {
     class Values
     {
-        public string Rus { get; private set; }
-        public string Eng { get; private set; }
-        public string EngTranscription { get; private set; }
-        public string Song { get; private set; }
-        public string Img { get; private set; }
+        public string Rus { get; set; }
+        public string Eng { get; set; }
+        public string EngTranscription { get; set; }
+        public string Song { get;  set; }
+        public string Img { get; set; }
         public string Help { get => Eng + " " + EngTranscription;  }
 
         
