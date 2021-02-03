@@ -13,18 +13,18 @@ namespace TestConsole
 
 
             SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = @"D:\test\test.db";
+            connectionStringBuilder.DataSource = @"D:\test\test2.db";
 
             using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
             {
 
-                connection.Open();
+                //  connection.Open();
                 //var delTableCmd = connection.CreateCommand();
-                //delTableCmd.CommandText = "DROP TABLE IF EXISTS 'Values1'";
+                //delTableCmd.CommandText = "DROP TABLE IF EXISTS 'values1'";
                 //delTableCmd.ExecuteNonQuery();
 
                 //var createTableCmd = connection.CreateCommand();
-                //createTableCmd.CommandText = "CREATE TABLE 'Values1'(" +
+                //createTableCmd.CommandText = "CREATE TABLE 'values1'(" +
                 //        "'id'	INTEGER NOT NULL UNIQUE ," +
                 //        "'eng'  VARCHAR(50) NOT NULL UNIQUE," +
                 //        "'engt'  VARCHAR(50)," +
@@ -62,25 +62,67 @@ namespace TestConsole
                 //Console.WriteLine(selectCmd.ExecuteScalar());
                 //selectCmd.CommandText = "SELECT eng,rus FROM Values1 WHERE id= 20";
                 //Console.WriteLine(selectCmd.ExecuteScalar());
+
+
+                //var createTableCmd = connection.CreateCommand();
+                //createTableCmd.CommandText = "CREATE TABLE 'Values2'(" +
+                //        "'id'	INTEGER NOT NULL UNIQUE ," +
+                //        "'eng'  VARCHAR(50) NOT NULL UNIQUE," +
+                //        "'engt'  VARCHAR(50)," +
+                //        "'rus'  VARCHAR(100) NOT NULL," +
+                //        "PRIMARY KEY('id' AUTOINCREMENT))";
+                //createTableCmd.ExecuteNonQuery();
+
+                //createTableCmd.CommandText = "CREATE TABLE 'Values3'(" +
+                //        "'id'	INTEGER NOT NULL UNIQUE ," +
+                //        "'eng'  VARCHAR(50) NOT NULL UNIQUE," +
+                //        "'engt'  VARCHAR(50)," +
+                //        "'rus'  VARCHAR(100) NOT NULL," +
+                //        "PRIMARY KEY('id' AUTOINCREMENT))";
+                //createTableCmd.ExecuteNonQuery();
+
+
+
+                connection.Open();
+                string textCmd = "SELECT eng,rus,engt FROM values1 WHERE id = 20";
+                SqliteCommand selectCommand = new SqliteCommand(textCmd, connection);
+
+                SqliteDataReader query = selectCommand.ExecuteReader();
+                query.Read();
+                
+                    Console.WriteLine(query.GetString(0) + query.GetString(1) + query.GetString(2) + query.GetString(2));
                 
 
 
+                // получить имена всех таблиц
+                textCmd = " SELECT name  FROM sqlite_master WHERE type = 'table'";
+                selectCommand = new SqliteCommand(textCmd, connection);
+
+                query = selectCommand.ExecuteReader();
+
+                //читать значения
+                while (query.Read())
+                {
+                    Console.WriteLine(query.GetString(0));
+                }
+
+                connection.Close();
                 //selectCmd.CommandText = "SELECT COUNT(*) FROM Values1";
                 //Console.WriteLine(selectCmd.ExecuteScalar());
-                
 
-                var eng = connection.CreateCommand();
-                eng.CommandText = $"SELECT eng FROM Values1 WHERE id={2}";
-                var rus = connection.CreateCommand();
-                rus.CommandText = $"SELECT rus FROM Values1 WHERE id={2}";
-                var engt = connection.CreateCommand();
-                engt.CommandText = $"SELECT engt FROM Values1 WHERE id={2}";
-                
-                Console.WriteLine(eng.ExecuteScalar().ToString()
-                                + engt.ExecuteScalar() + rus.ExecuteScalar());connection.Close();
-                Console.WriteLine("end");
+
+                //var eng = connection.CreateCommand();
+                //eng.CommandText = $"SELECT eng FROM Values1 WHERE id={2}";
+                //var rus = connection.CreateCommand();
+                //rus.CommandText = $"SELECT rus FROM Values1 WHERE id={2}";
+                //var engt = connection.CreateCommand();
+                //engt.CommandText = $"SELECT engt FROM Values1 WHERE id={2}";
+
+                //Console.WriteLine(eng.ExecuteScalar().ToString()
+                //                + engt.ExecuteScalar() + rus.ExecuteScalar());connection.Close();
+                Console.WriteLine("------------------------------end-----------------------------");
                 Console.ReadKey();
-
+                connection.Close();
             }
         }
     }
