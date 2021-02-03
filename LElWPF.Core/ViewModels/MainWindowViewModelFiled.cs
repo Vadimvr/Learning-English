@@ -14,6 +14,7 @@ namespace LElWPF.Core.ViewModels
         private MediaPlayer mediaPlayer = new MediaPlayer();
         IDialogService dialogService = new DefaultDialogService();
         ConectionDB DB;
+
         bool FirstRun { get; set; } = true;
                
         #region RandomValues

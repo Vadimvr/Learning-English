@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Data\image\sound.png" />
     <None Remove="Views\Windows\help.svg" />
-    <None Remove="Views\Windows\sound.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,12 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\image\" />
     <Folder Include="Resources\img\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\Windows\sound.png" />
+    <Resource Include="Data\image\sound.png" />
   </ItemGroup>
 
 </Project>
