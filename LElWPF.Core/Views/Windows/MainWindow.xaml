@@ -77,7 +77,7 @@
                           Command="{Binding OpenDictionaryCommand}"/>
                 <MenuItem Header="Сreate a dictionary" 
                           Style="{StaticResource MenuItemStyle}"
-                          Command="{Binding OpenSeconWindowCommand}"/>
+                          Command="{Binding OpenDatabaseWindowCommand}"/>
             </MenuItem>
         </Menu>
 
