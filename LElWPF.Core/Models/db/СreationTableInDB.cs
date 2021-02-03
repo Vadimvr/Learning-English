@@ -5,6 +5,7 @@ using System.Text;
 
 namespace LElWPF.Core.Models.db
 {
+
     class СreationTableInDB
     {
 
@@ -37,7 +38,6 @@ namespace LElWPF.Core.Models.db
             {
 
             }
-
         }
         public List<string> GetTablesName()
         {
