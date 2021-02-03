@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace LElWPF.Core.Models.db
@@ -47,7 +48,7 @@ namespace LElWPF.Core.Models.db
                 db.Open();
                 SqliteCommand selectCommand = new SqliteCommand(" SELECT name  FROM sqlite_master WHERE type = 'table'", db);
                 SqliteDataReader query = selectCommand.ExecuteReader();
-                query = selectCommand.ExecuteReader();
+               
 
 
                 while (query.Read())
@@ -59,7 +60,7 @@ namespace LElWPF.Core.Models.db
                 return list;
             }
         }
-        public void AddetValues(List<Values> values, string TableName)
+        public void AddedValues(List<Values> values, string TableName)
         {
             using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
             {
@@ -85,5 +86,49 @@ namespace LElWPF.Core.Models.db
                 db.Close();
             }
         }
+
+        public List<Values> GetAllVelues(string nameTable)
+        {
+            List<Values> values = new List<Values>();
+            try
+            {
+                
+                using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
+                {
+                    db.Open();
+                    SqliteCommand selectCommand = new SqliteCommand($"SELECT eng, engt, rus   FROM {nameTable}", db);
+
+                    SqliteDataReader query = selectCommand.ExecuteReader();
+                    while (query.Read())
+                    {
+
+                        values.Add(new Values(query.GetString(0), query.GetString(1), query.GetString(2), PathDB));
+                    }
+
+                    db.Close();
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"{ex}");
+            }
+            return values;
+        }
+
+        public  ObservableCollection<TableInDB> GetFullBase()
+        {
+            ObservableCollection<TableInDB> temp = new ObservableCollection<TableInDB>();
+
+           
+            foreach (string item in GetTablesName())
+            {
+                if (item == "sqlite_sequence")
+                    continue;
+                temp.Add(new TableInDB(item, GetAllVelues(item)));
+            }
+            return temp;
+        }
+        
     }
 }
