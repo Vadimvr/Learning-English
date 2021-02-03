@@ -34,38 +34,33 @@ namespace LElWPF.Core.Models.db
         }
         public Values GetRandomValues()
         {
-            string[] temp;
+            
             //int random = rnd.Next(SatrtIndex, EndIndex); 
 
             int random = SatrtIndex++;
+
+
             try
             {
+                Values values;
                 using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
                 {
-
                     connection.Open();
+                    SqliteCommand selectCommand = new SqliteCommand($"SELECT eng, engt, rus   FROM Values1 WHERE id={random}", connection);
 
-                    var rus = connection.CreateCommand();
-                    rus.CommandText = $"SELECT rus FROM Values1 WHERE id={random}";
+                    SqliteDataReader query = selectCommand.ExecuteReader();
 
-                    var eng = connection.CreateCommand();
-                    eng.CommandText = $"SELECT eng FROM Values1 WHERE id={random}";
+                    query.Read();
+                    values = new Values(query.GetString(0), query.GetString(1), query.GetString(2), PathDB);
 
-                    var engt = connection.CreateCommand();
-                    engt.CommandText = $"SELECT engt FROM Values1 WHERE id={random}";
-
-                    temp = new string[]{
-                    rus.ExecuteScalar().ToString(),
-                    eng.ExecuteScalar().ToString(),
-                    engt.ExecuteScalar().ToString()};
                     connection.Close();
                 }
-                return new Values(temp, PathDB);
+                return values;
             }
             catch
             {
                 SatrtIndex = 1;
-                return new Values("a", "a", "a", PathDB);
+                return new Values("err", "errr", "errr", PathDB);
             }
 
         }

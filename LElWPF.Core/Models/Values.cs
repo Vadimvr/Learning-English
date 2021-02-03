@@ -9,9 +9,9 @@
         public string Img { get; private set; }
         public string Help { get => Eng + " " + EngTranscription;  }
 
-        public Values(string[] arr, string path) : this(arr[0], arr[1], arr[2], path) { }
         
-        public Values(string wordRus, string wordEng, string transcription, string path)
+        
+        public Values(string wordEng, string transcription, string wordRus,  string path)
         {
             Rus = wordRus;
             Eng = wordEng;
