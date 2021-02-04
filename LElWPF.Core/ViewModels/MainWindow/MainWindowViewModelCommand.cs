@@ -14,7 +14,7 @@ namespace LElWPF.Core.ViewModels
 
         public ICommand OpenDatabaseWindowCommand { get; }
 
-        private bool CanOpenDatabaseWindowCommandExecute(object p) => FileFaind;
+        private bool CanOpenDatabaseWindowCommandExecute(object p) => FileFound;
         private void OnOpenDatabaseWindowCommandExecuted(object p)
         {
            
@@ -24,9 +24,6 @@ namespace LElWPF.Core.ViewModels
         }
        
         #endregion
-
-
-
 
         #region OpenDictionaryCommand
 
@@ -47,13 +44,13 @@ namespace LElWPF.Core.ViewModels
                     {
                         StaticPath = dialogService.Path;
                         StaticName = dialogService.File;
-                        DB = new ConectionDB(dialogService.Path, dialogService.File);
+                        DB = new RandomValueFromTable(dialogService.Path, dialogService.File);
                         RandomValues = DB.GetRandomValues();
-                        FileFaind = true;
+                        FileFound = true;
                     }
                     catch (System.Exception ex)
                     {
-                        Status = "Not found " + _path + _nameDB;
+                        Status = ex.Message;
                     }
                 }
             }
@@ -96,7 +93,7 @@ namespace LElWPF.Core.ViewModels
 
         public ICommand ClickButtonCheckCommand { get; }
 
-        private bool CanClickButtonCheckCommandExecute(object p) => FileFaind;
+        private bool CanClickButtonCheckCommandExecute(object p) => FileFound;
         private void OnClickButtonCheckCommandExecuted(object p)
         {
             

@@ -12,8 +12,8 @@ namespace LElWPF.Core.Models.db
 
          string Path { get; set; }
         string Name { get; set; }
-        СreationTableInDB СreationTable { get; set; }
-        public TableInDB(string nameTable, List<Values> values, string path, string name, СreationTableInDB сreationTableInDB)
+        ReceivingDataFromSQlite СreationTable { get; set; }
+        public TableInDB(string nameTable, List<Values> values, string path, string name, ReceivingDataFromSQlite сreationTableInDB)
         {
             Path = path;
             Name = name;
@@ -23,17 +23,14 @@ namespace LElWPF.Core.Models.db
         }
         public void SeveTable()
         {
-            СreationTable.СreationTable(NameTable);
-            СreationTable.AddedValues(new List<Values>(Values), NameTable);
+            СreationTable.СreationNewTable(NameTable);
+            СreationTable.AddValueInTable(new List<Values>(Values), NameTable);
         }
         public void DeleteTable()
         {
             СreationTable.DeleteTable(NameTable);
         }
-        public TableInDB(TableInDB tableInDB)
-        {
-            Values = tableInDB.Values;
-        }
+        
 
     }
 }

@@ -2,22 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace LElWPF.Core.Models.db
 {
 
-    class СreationTableInDB
+    class ReceivingDataFromSQlite
     {
 
         string PathDB { get; set; }
         string NameDB { get; set; }
-        public СreationTableInDB(string nameTable, string pathDB)
+        public ReceivingDataFromSQlite(string path, string nameDB)
         {
-            PathDB = nameTable;
-            NameDB = pathDB;
+            PathDB = path;
+            NameDB = nameDB;
         }
-        public void СreationTable(string nameTable)
+        public void СreationNewTable(string nameTable)
         {
             try
             {
@@ -41,7 +40,6 @@ namespace LElWPF.Core.Models.db
             }
             catch
             {
-
             }
         }
 
@@ -60,12 +58,10 @@ namespace LElWPF.Core.Models.db
             }
             catch
             {
-
             }
         }
 
-
-        public List<string> GetTablesName()
+        public List<string> GetTablesNames()
         {
             List<string> list = new List<string>();
             using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
@@ -73,19 +69,17 @@ namespace LElWPF.Core.Models.db
                 db.Open();
                 SqliteCommand selectCommand = new SqliteCommand(" SELECT name  FROM sqlite_master WHERE type = 'table'", db);
                 SqliteDataReader query = selectCommand.ExecuteReader();
-               
-
-
                 while (query.Read())
                 {
+                    if (query.GetString(0) == "sqlite_sequence")
+                        continue;
                     list.Add(query.GetString(0));
                 }
-
                 db.Close();
                 return list;
             }
         }
-        public void AddedValues(List<Values> values, string TableName)
+        public void AddValueInTable(List<Values> values, string tableName)
         {
             using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
             {
@@ -96,7 +90,7 @@ namespace LElWPF.Core.Models.db
                     var insertCmd = db.CreateCommand();
                     for (int i = 0; i < values.Count; i++)
                     {
-                        insertCmd.CommandText = $"INSERT INTO [{TableName}] ([eng], [engt], [rus])"
+                        insertCmd.CommandText = $"INSERT INTO [{tableName}] ([eng], [engt], [rus])"
                             + $"VALUES('{values[i].Eng}', '{values[i].EngTranscription}', '{values[i].Rus}')";
                         try
                         {
@@ -113,12 +107,11 @@ namespace LElWPF.Core.Models.db
             }
         }
 
-        public List<Values> GetAllVelues(string nameTable)
+        public List<Values> GetAllValuesFromTable(string nameTable)
         {
             List<Values> values = new List<Values>();
             try
             {
-                
                 using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
                 {
                     db.Open();
@@ -127,13 +120,10 @@ namespace LElWPF.Core.Models.db
                     SqliteDataReader query = selectCommand.ExecuteReader();
                     while (query.Read())
                     {
-
                         values.Add(new Values(query.GetString(0), query.GetString(1), query.GetString(2), PathDB));
                     }
-
                     db.Close();
                 }
-                
             }
             catch(Exception ex)
             {
@@ -142,15 +132,12 @@ namespace LElWPF.Core.Models.db
             return values;
         }
 
-        public  ObservableCollection<TableInDB> GetFullBase(СreationTableInDB сreationTableInDB)
+        public  ObservableCollection<TableInDB> GetTheWholeDB(ReceivingDataFromSQlite сreationTableInDB)
         {
             ObservableCollection<TableInDB> temp = new ObservableCollection<TableInDB>();
-           
-            foreach (string item in GetTablesName())
+            foreach (string item in GetTablesNames())
             {
-                if (item == "sqlite_sequence")
-                    continue;
-                temp.Add(new TableInDB(item, GetAllVelues(item), PathDB,NameDB, сreationTableInDB));
+                temp.Add(new TableInDB(item, GetAllValuesFromTable(item), PathDB,NameDB, сreationTableInDB));
             }
             return temp;
         }

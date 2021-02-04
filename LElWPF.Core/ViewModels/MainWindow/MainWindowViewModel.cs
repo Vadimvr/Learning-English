@@ -11,7 +11,7 @@ namespace LElWPF.Core.ViewModels
    
         public MainWindowViewModel()
         {
-            FileFaind = File.Exists(StaticPath+ StaticName);
+            FileFound = File.Exists(StaticPath+ StaticName);
 
 
             Status = StaticPath;
@@ -19,9 +19,9 @@ namespace LElWPF.Core.ViewModels
 
             try
             {
-                if (FileFaind)
+                if (FileFound)
                 {
-                    DB = new ConectionDB(StaticPath , StaticName);
+                    DB = new RandomValueFromTable(StaticPath , StaticName);
                     RandomValues = DB.GetRandomValues();
                 }
                 else

@@ -23,7 +23,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         #endregion
 
 
-        СreationTableInDB сreationTableInDB;
+        ReceivingDataFromSQlite сreationTableInDB;
 
         #region SelectedTable
 
@@ -157,7 +157,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
             SaveTablesCommand = new LambdaCommand(OnSaveTablesCommandExecuted, CanSaveTablesCommandExecute);
             AddNewTableCommand = new LambdaCommand(OnAddNewTableCommandExecuted, CanAddNewTableCommandExecute);
 
-            //сreationTableInDB = new СreationTableInDB(@"D:\test\", "t.db");
+            //сreationTableInDB = new ReceivingDataFromSQlite(@"D:\test\", "t.db");
             AllDB = new FullBase(StaticPath, StaticName);
         }
     }

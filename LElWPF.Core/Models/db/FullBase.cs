@@ -8,7 +8,7 @@ namespace LElWPF.Core.Models.db
     class FullBase: ObservableCollection<TableInDB>
     {
         public ObservableCollection<TableInDB> AllTables { get; set; }
-        private СreationTableInDB сreationTableInDB;
+        private ReceivingDataFromSQlite сreationTableInDB;
 
         string Path { get; set; }
         string Name { get; set; }
@@ -16,8 +16,8 @@ namespace LElWPF.Core.Models.db
         {
             Path = path;
             Name = name;
-            сreationTableInDB = new СreationTableInDB(path, name);
-            AllTables = сreationTableInDB.GetFullBase(сreationTableInDB);
+            сreationTableInDB = new ReceivingDataFromSQlite(path, name);
+            AllTables = сreationTableInDB.GetTheWholeDB(сreationTableInDB);
         }
 
         public FullBase(ObservableCollection<TableInDB> creationTable, string path, string name)
