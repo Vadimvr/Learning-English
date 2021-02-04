@@ -24,6 +24,10 @@ namespace LElWPF.Core.Models.db
                 using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
                 {
                     db.Open();
+                    var delTableCmd = db.CreateCommand();
+                    delTableCmd.CommandText = $"DROP TABLE IF EXISTS '{nameTable}'";
+                    delTableCmd.ExecuteNonQuery();
+                    
                     var createTableCmd = db.CreateCommand();
                     createTableCmd.CommandText = $"CREATE TABLE '{nameTable}'(" +
                             "'id'	INTEGER NOT NULL UNIQUE ," +
@@ -40,6 +44,27 @@ namespace LElWPF.Core.Models.db
 
             }
         }
+
+        public void DeleteTable(string nameTable)
+        {
+            try
+            {
+                using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
+                {
+                    db.Open();
+                    var delTableCmd = db.CreateCommand();
+                    delTableCmd.CommandText = $"DROP TABLE IF EXISTS '{nameTable}'";
+                    delTableCmd.ExecuteNonQuery();
+                    db.Close();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+
         public List<string> GetTablesName()
         {
             List<string> list = new List<string>();
@@ -67,6 +92,7 @@ namespace LElWPF.Core.Models.db
                 db.Open();
                 using (var transaction = db.BeginTransaction())
                 {
+
                     var insertCmd = db.CreateCommand();
                     for (int i = 0; i < values.Count; i++)
                     {

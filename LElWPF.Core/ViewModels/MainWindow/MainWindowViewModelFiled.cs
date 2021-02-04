@@ -8,15 +8,18 @@ namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
+        string _path { get; set; } = @"D:\test\"; 
+        string _nameDB { get; set; } = "test2.db";
+        public bool FileFaind { get; set; } = false;
 
         #region Filed
-        
+
         private MediaPlayer mediaPlayer = new MediaPlayer();
         IDialogService dialogService = new DefaultDialogService();
         ConectionDB DB;
 
         bool FirstRun { get; set; } = true;
-               
+
         #region RandomValues
 
         private Values _RandomValues;

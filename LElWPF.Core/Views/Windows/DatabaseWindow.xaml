@@ -6,42 +6,78 @@
         xmlns:local="clr-namespace:LElWPF.Core.Views.Windows"
         xmlns:vmDB="clr-namespace:LElWPF.Core.ViewModels.DatabaseWindow"
         mc:Ignorable="d"
-        Title="DatabaseWindow" Height="800" Width="800">
+        Title="DatabaseWindow" Height="500" Width="800">
     <Window.DataContext>
         <vmDB:DatabaseWindowViewModel/>
     </Window.DataContext>
-    <Grid>
+    <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="261*"></RowDefinition>
-            <RowDefinition Height="376*"></RowDefinition>
-            <RowDefinition Height="147*"></RowDefinition>
-        </Grid.RowDefinitions>
         <GroupBox Grid.Column="0" Header="Tables" >
-            <ListBox ItemsSource="{Binding AllDB.AllTables}" SelectedIndex="0"
-                                 DisplayMemberPath="NameTable"
-                                 SelectedItem="{Binding SelectedTable}"/>
+            <DockPanel>
+                <UniformGrid DockPanel.Dock="Bottom" Columns="1" Height="110" Margin="0,60,0,0">
+                    <TextBox  Text="{Binding NameNewTable, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Content="Add new table" Command="{Binding AddNewTableCommand}" Margin="0,5,0, 5"/>
+                    <DockPanel>
+                        <UniformGrid Rows="1" >
+
+                            <Button Content="Seve tables" Command="{Binding SaveTablesCommand}" Height="30" Margin="0,0,5,0"/>
+                            <Button Content="Delete table" Command="{Binding DeleteTableCommand}"  Height="30" Margin="5,0,0,0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                </UniformGrid>
+                <ListBox ItemsSource="{Binding AllDB.AllTables}" 
+                     DisplayMemberPath="NameTable"
+                     SelectedItem="{Binding SelectedTable}"
+                     SelectedIndex="0"
+                         />
+            </DockPanel>
         </GroupBox>
-        <GroupBox Grid.Column="1" Grid.RowSpan="3" Header="{Binding SelectedTable.NameTable, FallbackValue='Values', TargetNullValue='Таблица не выбрана'}">
-            <DataGrid ItemsSource="{Binding SelectedTable.Values}" 
+        <GroupBox Grid.Column="1" Grid.RowSpan="2" Header="{Binding SelectedTable.NameTable, FallbackValue='Values', TargetNullValue='Таблица не выбрана'}">
+            <DockPanel>
+                <UniformGrid DockPanel.Dock="Bottom" Columns="1" Height="150" Margin="0,20,0,0">
+                    <DockPanel>
+                        <UniformGrid DockPanel.Dock="Top" Columns="1" >
+                            <TextBox  
+                                     Text="{Binding AddValueTemp.Eng, UpdateSourceTrigger=PropertyChanged}" Margin="100,0,0,5" Height="20"
+                                     />
+                            <TextBox Height="20"
+                                     Text="{Binding AddValueTemp.EngTranscription, UpdateSourceTrigger=PropertyChanged}" Margin="100,0,0,5"/>
+                            <TextBox  Height="20"
+                                     Text="{Binding AddValueTemp.Rus, UpdateSourceTrigger=PropertyChanged}" Margin="100,0,0,10"/>
+                        </UniformGrid>
+
+                        <UniformGrid DockPanel.Dock="Bottom" Columns="2" Margin="100,25,0,5">
+                            <Button Grid.Row="2" Content="Add value" Command="{Binding AddValuesCommand}" Margin="0,0,25,0" />
+                            <Button Grid.Row="2" Content="Delete value" Command="{Binding DeleteValueCommand}"  Margin="25,0,0,0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                </UniformGrid>
+                <UniformGrid DockPanel.Dock="Bottom">
+                </UniformGrid>
+                <DataGrid ItemsSource="{Binding SelectedTable.Values, UpdateSourceTrigger=PropertyChanged}"                     
                                   AutoGenerateColumns="False"
-                                  CanUserAddRows="True"
+                                  CanUserAddRows="False"
                                   GridLinesVisibility="Vertical"
                                   VerticalGridLinesBrush="DarkGray"
-                                  AlternatingRowBackground="LightGray">
-                <DataGrid.Columns >
-                    <DataGridTextColumn Header="English" Binding="{Binding Eng }" IsReadOnly="False"  Width="1*"/>
-                    <DataGridTextColumn Header="Transcription" Binding="{Binding EngTranscription}" IsReadOnly="False" Width="1*" />
-                    <DataGridTextColumn Header="Русский" Binding="{Binding Rus}" IsReadOnly="False" Width="1*"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                                  AlternatingRowBackground="LightGray" 
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding SelectedValue}">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="English" Binding="{Binding Eng , UpdateSourceTrigger=PropertyChanged }" IsReadOnly="False"  Width="1*"/>
+                        <DataGridTextColumn Header="Transcription" Binding="{Binding EngTranscription , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="1*" />
+                        <DataGridTextColumn Header="Русский" Binding="{Binding Rus , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="1*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </DockPanel>
+
+
         </GroupBox>
-        <TextBox Grid.Row="2" Margin="24,16,19,103" Text="{Binding NameNewTable, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.502,0.5"/>
-        <Button Grid.Row="2" Content="Add table" Command="{Binding AddNewTableCommand}" Margin="20,67,140,46"/>
-        <Button Grid.Row="2" Content="SeveTables" Command="{Binding SaveTablesCommand}" Margin="126,67,34,46"/>
+
+
 
 
     </Grid>

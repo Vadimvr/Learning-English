@@ -19,5 +19,15 @@
             Img =path + $@"img\{wordEng}.jpg";
             EngTranscription = transcription;
         }
+        public Values(string wordEng, string transcription, string wordRus)
+        {
+            Rus = wordRus;
+            Eng = wordEng;
+            EngTranscription = transcription;
+        }
+        public Values()
+        {
+            
+        }
     }
 }

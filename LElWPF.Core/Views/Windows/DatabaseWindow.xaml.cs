@@ -21,5 +21,7 @@ namespace LElWPF.Core.Views.Windows
         {
             InitializeComponent();
         }
+
+        
     }
 }

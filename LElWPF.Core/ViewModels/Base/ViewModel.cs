@@ -7,6 +7,8 @@ namespace LElWPF.Core.ViewModels.Base
 {
     internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {
+        public static string StaticPath = "";
+        public static string StaticName = "";
         #region Property Changed
 
         public event PropertyChangedEventHandler PropertyChanged;

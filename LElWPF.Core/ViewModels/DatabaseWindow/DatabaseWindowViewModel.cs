@@ -7,12 +7,13 @@ using LElWPF.Core.Models.db;
 using System.Windows.Input;
 using System.Windows;
 using LElWPF.Core.Infrastructure.Commands;
+using LElWPF.Core.Models;
 
 namespace LElWPF.Core.ViewModels.DatabaseWindow
 {
     class DatabaseWindowViewModel : ViewModel
     {
-       // public ObservableCollection<TableInDB> AllDB { get; private set; }
+        // public ObservableCollection<TableInDB> AllDB { get; private set; }
 
         #region AllDB
 
@@ -23,12 +24,10 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 
 
         СreationTableInDB сreationTableInDB;
+
         #region SelectedTable
 
-
         private TableInDB _SelectedTable;
-
-       
         public TableInDB SelectedTable
         {
             get => _SelectedTable;
@@ -37,6 +36,73 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 
         #endregion
 
+        #region SelectedValue
+
+        private Values _SelectedValue;
+        public Values SelectedValue
+        {
+            get
+            {
+                //if (_SelectedValue != null)
+                //    AddValueTemp = new Values(SelectedValue.Eng, SelectedValue.EngTranscription, SelectedValue.Rus);
+                return _SelectedValue;
+            }
+
+            set 
+            {
+                
+                Set(ref _SelectedValue, value);
+
+            }
+        }
+
+        #endregion
+
+        #region AddValueTemp
+
+        private Values _AddValueTemp = new Values();
+        public Values AddValueTemp { get => _AddValueTemp; set => Set(ref _AddValueTemp, value); }
+
+        #endregion
+
+
+        #region AddValuesCommand
+
+        public ICommand AddValuesCommand { get; }
+
+        private bool CanAddValuesCommandExecute(object p) => true;
+        private void OnAddValuesCommandExecuted(object p)
+        {
+            
+            SelectedTable.Values.Add(new Values(AddValueTemp.Eng, AddValueTemp.EngTranscription, AddValueTemp.Rus));
+          //  SelectedTable = new TableInDB (SelectedTable);
+        }
+
+        #endregion
+
+        #region CreadeValuesCommand
+
+        public ICommand CreadeValuesCommand { get; }
+
+        private bool CanCreadeValuesCommandExecute(object p) => true;
+        private void OnCreadeValuesCommandExecuted(object p)
+        {
+            if (SelectedValue == null)
+                SelectedValue = new Values();
+        }
+
+        #endregion
+        #region DeleteValueCommand
+
+        public ICommand DeleteValueCommand { get; }
+
+        private bool CanDeleteValueCommandExecute(object p) => true;
+        private void OnDeleteValueCommandExecuted(object p)
+        {
+            SelectedTable.Values.Remove(SelectedValue);
+        }
+
+        #endregion
         #region NameNewTable
 
         private string _NameNewTable;
@@ -61,27 +127,38 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         private bool CanSaveTablesCommandExecute(object p) => true;
         private void OnSaveTablesCommandExecuted(object p)
         {
-            //comamnd run
+            
             SelectedTable.SeveTable();
+            AllDB = new FullBase(@"D:\test\", "test2.db");
         }
-       
-        
+
         #endregion
 
+        #region DeleteTableCommand
 
+        public ICommand DeleteTableCommand { get; }
 
-
-
-
-
-
+        private bool CanDeleteTableCommandExecute(object p) => true;
+        private void OnDeleteTableCommandExecuted(object p)
+        {
+            SelectedTable.DeleteTable();
+            AllDB = new FullBase(@"D:\test\", "test2.db");
+        }
+        #endregion
 
         public DatabaseWindowViewModel()
         {
+
+            CreadeValuesCommand = new LambdaCommand(OnCreadeValuesCommandExecuted, CanCreadeValuesCommandExecute);
+
+            AddValuesCommand = new LambdaCommand(OnAddValuesCommandExecuted, CanAddValuesCommandExecute);
+            DeleteValueCommand = new LambdaCommand(OnDeleteValueCommandExecuted, CanDeleteValueCommandExecute);
+            DeleteTableCommand = new LambdaCommand(OnDeleteTableCommandExecuted, CanDeleteTableCommandExecute);
             SaveTablesCommand = new LambdaCommand(OnSaveTablesCommandExecuted, CanSaveTablesCommandExecute);
             AddNewTableCommand = new LambdaCommand(OnAddNewTableCommandExecuted, CanAddNewTableCommandExecute);
-            сreationTableInDB = new СreationTableInDB(@"D:\test\", "test2.db");
-            AllDB = new FullBase(@"D:\test\", "test2.db");
+
+            //сreationTableInDB = new СreationTableInDB(@"D:\test\", "t.db");
+            AllDB = new FullBase(StaticPath, StaticName);
         }
     }
 }

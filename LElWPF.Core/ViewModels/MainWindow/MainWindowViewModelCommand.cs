@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using LElWPF.Core.Views.Windows;
+using LElWPF.Core.Models.db;
 
 namespace LElWPF.Core.ViewModels
 {
@@ -13,11 +14,13 @@ namespace LElWPF.Core.ViewModels
 
         public ICommand OpenDatabaseWindowCommand { get; }
 
-        private bool CanOpenDatabaseWindowCommandExecute(object p) => true;
+        private bool CanOpenDatabaseWindowCommandExecute(object p) => FileFaind;
         private void OnOpenDatabaseWindowCommandExecuted(object p)
         {
-            Views.Windows.DatabaseWindow databaseWindow = new Views.Windows.DatabaseWindow();
-            databaseWindow.ShowDialog();
+           
+                Views.Windows.DatabaseWindow databaseWindow = new Views.Windows.DatabaseWindow();
+               
+                databaseWindow.Show();           
         }
        
         #endregion
@@ -40,6 +43,18 @@ namespace LElWPF.Core.ViewModels
                     //DataValues = new ListValues(dialogService.Path, dialogService.File);
                     //RandomValues = DataValues.GetRandomValues();
                     //Status = dialogService.FilePath;
+                    try
+                    {
+                        StaticPath = dialogService.Path;
+                        StaticName = dialogService.File;
+                        DB = new ConectionDB(dialogService.Path, dialogService.File);
+                        RandomValues = DB.GetRandomValues();
+                        FileFaind = true;
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Status = "Not found " + _path + _nameDB;
+                    }
                 }
             }
             catch (Exception ex)
@@ -81,9 +96,10 @@ namespace LElWPF.Core.ViewModels
 
         public ICommand ClickButtonCheckCommand { get; }
 
-        private bool CanClickButtonCheckCommandExecute(object p) => true;
+        private bool CanClickButtonCheckCommandExecute(object p) => FileFaind;
         private void OnClickButtonCheckCommandExecuted(object p)
         {
+            
             if (FirstRun == true)
             {
                 ButtonHelpVisibility = Visibility.Visible;
