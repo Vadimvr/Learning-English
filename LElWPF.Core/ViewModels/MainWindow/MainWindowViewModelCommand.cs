@@ -17,7 +17,7 @@ namespace LElWPF.Core.ViewModels
         private void OnOpenDatabaseWindowCommandExecuted(object p)
         {
             Views.Windows.DatabaseWindow databaseWindow = new Views.Windows.DatabaseWindow();
-            databaseWindow.ShowDialog();
+            databaseWindow.Show();
         }
        
         #endregion
