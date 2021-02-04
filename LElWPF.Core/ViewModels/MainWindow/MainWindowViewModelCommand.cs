@@ -16,8 +16,8 @@ namespace LElWPF.Core.ViewModels
         private bool CanOpenDatabaseWindowCommandExecute(object p) => true;
         private void OnOpenDatabaseWindowCommandExecuted(object p)
         {
-            Views.Windows.DatabaseWindow databaseWindow =new  Views.Windows.DatabaseWindow();
-            databaseWindow.Show();
+            Views.Windows.DatabaseWindow databaseWindow = new Views.Windows.DatabaseWindow();
+            databaseWindow.ShowDialog();
         }
        
         #endregion
@@ -57,7 +57,6 @@ namespace LElWPF.Core.ViewModels
         private bool CanDisplayHintCommandExecute(object p) => true;
         private void OnDisplayHintCommandExecuted(object p)
         {
-
             ButtonHelpVisibility = Visibility.Collapsed;
             BorderHintVisibility = Visibility.Visible;
         }

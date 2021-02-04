@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LElWPF.Core.Views.Windows"
         xmlns:vmDB="clr-namespace:LElWPF.Core.ViewModels.DatabaseWindow"
         mc:Ignorable="d"
-        Title="DatabaseWindow" Height="450" Width="800">
+        Title="DatabaseWindow" Height="800" Width="800">
     <Window.DataContext>
         <vmDB:DatabaseWindowViewModel/>
     </Window.DataContext>
@@ -15,15 +15,20 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="0" Header="Tables">
-            <ListBox ItemsSource="{Binding AllDB}" SelectedIndex="0"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="261*"></RowDefinition>
+            <RowDefinition Height="376*"></RowDefinition>
+            <RowDefinition Height="147*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="0" Header="Tables" >
+            <ListBox ItemsSource="{Binding AllDB.AllTables}" SelectedIndex="0"
                                  DisplayMemberPath="NameTable"
                                  SelectedItem="{Binding SelectedTable}"/>
         </GroupBox>
-        <GroupBox Grid.Column="1" Header="{Binding SelectedTable.NameTable, FallbackValue='Values', TargetNullValue='Таблица не выбрана'}">
+        <GroupBox Grid.Column="1" Grid.RowSpan="3" Header="{Binding SelectedTable.NameTable, FallbackValue='Values', TargetNullValue='Таблица не выбрана'}">
             <DataGrid ItemsSource="{Binding SelectedTable.Values}" 
                                   AutoGenerateColumns="False"
-                                  CanUserAddRows="False"
+                                  CanUserAddRows="True"
                                   GridLinesVisibility="Vertical"
                                   VerticalGridLinesBrush="DarkGray"
                                   AlternatingRowBackground="LightGray">
@@ -34,5 +39,10 @@
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
+        <TextBox Grid.Row="2" Margin="24,16,19,103" Text="{Binding NameNewTable, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.502,0.5"/>
+        <Button Grid.Row="2" Content="Add table" Command="{Binding AddNewTableCommand}" Margin="20,67,140,46"/>
+        <Button Grid.Row="2" Content="SeveTables" Command="{Binding SaveTablesCommand}" Margin="126,67,34,46"/>
+
+
     </Grid>
 </Window>

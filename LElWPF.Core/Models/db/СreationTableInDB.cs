@@ -116,16 +116,15 @@ namespace LElWPF.Core.Models.db
             return values;
         }
 
-        public  ObservableCollection<TableInDB> GetFullBase()
+        public  ObservableCollection<TableInDB> GetFullBase(СreationTableInDB сreationTableInDB)
         {
             ObservableCollection<TableInDB> temp = new ObservableCollection<TableInDB>();
-
            
             foreach (string item in GetTablesName())
             {
                 if (item == "sqlite_sequence")
                     continue;
-                temp.Add(new TableInDB(item, GetAllVelues(item)));
+                temp.Add(new TableInDB(item, GetAllVelues(item), PathDB,NameDB, сreationTableInDB));
             }
             return temp;
         }

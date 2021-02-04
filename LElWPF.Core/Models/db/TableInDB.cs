@@ -8,10 +8,22 @@ namespace LElWPF.Core.Models.db
     {
         public string NameTable { get; set; }
         public List<Values> Values { get; set; }
-        public TableInDB(string nameTable, List<Values> values)
+
+         string Path { get; set; }
+        string Name { get; set; }
+        СreationTableInDB СreationTable { get; set; }
+        public TableInDB(string nameTable, List<Values> values, string path, string name, СreationTableInDB сreationTableInDB)
         {
+            Path = path;
+            Name = name;
             NameTable = nameTable;
             Values = values;
+            СreationTable = сreationTableInDB;
         }
+        public void SeveTable()
+        {
+            СreationTable.СreationTable(NameTable);
+        }
+       
     }
 }
