@@ -25,6 +25,28 @@
             <Setter Property="Control.HorizontalAlignment" Value="Left"/>
             <Setter Property="Control.Margin" Value="100,0,20,0"/>
         </Style.Setters>
-       
+    </Style>
+    <Style x:Key="RectangleNewSomgFile" TargetType="Rectangle" >
+        <Style.Setters>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Opacity" Value="1"></Setter>
+                <Setter Property="Opacity" Value="1"></Setter>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.7"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="RectangleNewImgFile" TargetType="Rectangle" BasedOn="{StaticResource RectangleNewSomgFile}" >
+        <Style.Setters>
+            <Setter Property="Margin" Value="100,0,20,0"/>
+        </Style.Setters>
     </Style>
 </ResourceDictionary>
