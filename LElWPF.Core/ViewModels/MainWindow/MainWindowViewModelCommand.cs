@@ -52,7 +52,9 @@ namespace LElWPF.Core.ViewModels
                         StaticPath = dialogService.Path;
                         StaticName = dialogService.File;
                         DB = new RandomValueFromTable(StaticPath, StaticName);
-                        RandomValues = DB.GetRandomValues();
+                        NamesTable = DB.NamesTable;
+                        DB.NameTable = SelectedTable; 
+                        
                         FileFound = true;
                     }
                     catch (System.Exception ex)
@@ -117,8 +119,8 @@ namespace LElWPF.Core.ViewModels
             else
             {
                 // disabled сhecking the correct answer
-                if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
-                {
+                //if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
+                //{
                     ButtonHelpVisibility = Visibility.Visible;
                     BorderHintVisibility = Visibility.Collapsed;
                     RandomValues = DB.GetRandomValues();
@@ -126,7 +128,7 @@ namespace LElWPF.Core.ViewModels
                     mediaPlayer.Stop();
                     mediaPlayer.Open(new Uri(RandomValues.Song));
                     mediaPlayer.Play();
-                }
+               // }
             }
         }
         #endregion

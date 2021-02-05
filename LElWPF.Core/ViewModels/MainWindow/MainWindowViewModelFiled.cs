@@ -10,18 +10,87 @@ namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
-       
+
         bool FirstRun { get; set; } = true;
         private MediaPlayer mediaPlayer = new MediaPlayer();
         IDialogService dialogService = new DefaultDialogService();
         public bool FileFound { get; set; } = false;
-        //#region DB
+
 
         private RandomValueFromTable _DB;
         public RandomValueFromTable DB { get => _DB; set => Set(ref _DB, value); }
 
 
+        #region NamesTable
+
+        private ObservableCollection<string> _NamesTable;
+        public ObservableCollection<string> NamesTable { get => _NamesTable; set => Set(ref _NamesTable, value); }
+
+       
+        #endregion
+
+        #region SelectedTable
+
+        private string _SelectedTable;
+        public string SelectedTable
+        {
+            get => _SelectedTable; set
+            {
+                Set(ref _SelectedTable, value);
+                DB.NameTable = SelectedTable;
+                StartIndex = DB.StartIndex;
+                EndIndex = DB.EndIndex;
+                RandomValues = DB.GetRandomValues();
+            }
+        }
+
+        #endregion
+
+        #region StartIndex
+
+        private int _StartIndex;
+        public int StartIndex
+        {
+            get => _StartIndex; set
+            {
+                DB.StartIndex = value;
+                Set(ref _StartIndex, DB.StartIndex);
+                if(value > EndIndex)
+                    EndIndex = DB.EndIndex;
+                RandomValues = DB.GetRandomValues();
+            }
+        }
+
+        #endregion
+
+        #region EndIndex
+
+        private int _EndIndex;
+        public int EndIndex
+        {
+            get => _EndIndex; set
+            {
+                DB.EndIndex = value;
+                Set(ref _EndIndex, DB.EndIndex);
+                if (value < StartIndex)
+                    StartIndex = DB.StartIndex;
+                RandomValues = DB.GetRandomValues();
+            }
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
         #region Filed
+
+
 
         #region RandomValues
 
@@ -29,7 +98,7 @@ namespace LElWPF.Core.ViewModels
         public Values RandomValues { get => _RandomValues; set => Set(ref _RandomValues, value); }
 
         #endregion
-        
+
         #region Title
         private string _Title = "Learning English language";
         public string Title { get => _Title; set => Set(ref _Title, value); }
