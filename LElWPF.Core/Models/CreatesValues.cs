@@ -5,8 +5,8 @@
         public CreatesValues() { }
         public static Values CredeData(string stringFromDB, string path)
         {
-            string id = "";
-            string rus = "";
+            //string id = "";
+            //string rus = "";
             string eng = "";
             string engT = "";
             int temp = 0;
@@ -22,7 +22,6 @@
                     engT = stringFromDB.Substring(temp, i - temp);
                     temp = i + 1; break;
                 }
-               
             }
             return new Values(stringFromDB[temp..].Trim(), eng, engT, path);
         }
