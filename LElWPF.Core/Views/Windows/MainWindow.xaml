@@ -9,6 +9,8 @@
         Height="800" 
         Width="1300"
         Title="{Binding Title}">
+    <!--#region Resources-->
+
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
@@ -57,10 +59,24 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+ <!--#endregion-->
 
-
-    <DockPanel >
-        <Menu DockPanel.Dock="Top"  
+    
+    <Grid>
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="124*"></ColumnDefinition>
+            <ColumnDefinition Width="743*"></ColumnDefinition>
+            <ColumnDefinition Width="433*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <!--#region menu-->
+        <Menu  Grid.Column="0" Grid.ColumnSpan="3"
               Style="{StaticResource MenuStyle}" >
             <MenuItem Header="Menu"  
                       Style="{StaticResource MenuStyle}">
@@ -80,110 +96,179 @@
                           Command="{Binding OpenDatabaseWindowCommand}"/>
             </MenuItem>
         </Menu>
+    <!--#endregion-->
 
 
-        <StatusBar 
-            DockPanel.Dock="Bottom" 
-            Style="{StaticResource StatusBarStyle}">
-            <StatusBarItem>
-                <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
-            </StatusBarItem>
-        </StatusBar>
+        <!--#region main-->
+        <Border Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="20"/>
-            </Grid.RowDefinitions>
-
-            <Image Style="{StaticResource PictureStyle}" 
+                <Image Style="{StaticResource PictureStyle}" 
                    Source="{Binding RandomValues.Img, UpdateSourceTrigger=PropertyChanged}" 
                    Visibility="{Binding FirstStartApp, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBlock Style="{StaticResource TextBlockQuestion}" 
+                <TextBlock Style="{StaticResource TextBlockQuestion}" 
                        Text="{Binding RandomValues.Rus, UpdateSourceTrigger=PropertyChanged}"
                        Visibility="{Binding FirstStartApp, UpdateSourceTrigger=PropertyChanged}"
                        Grid.Row="1"/>
 
-            <Border  Grid.Row="2">
-                <Grid >
-                    <Grid.ColumnDefinitions >
-                        <ColumnDefinition ></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                <Border  Grid.Row="2">
+                    <Grid >
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                    <Border
+                        <Border
                         Style="{StaticResource BorderHint}"
                         Grid.Column="2"
                         Grid.ColumnSpan="2"
                         Visibility="{Binding BorderHintVisibility , UpdateSourceTrigger=PropertyChanged}">
-                        <TextBlock
+                            <TextBlock
                             Grid.Column="0"
                             Style="{StaticResource TextBlockHint}"
                             Text="{Binding RandomValues.Help , UpdateSourceTrigger=PropertyChanged}">
-                        </TextBlock>
-                    </Border>
-                    <Ellipse 
+                            </TextBlock>
+                        </Border>
+                        <Ellipse 
                         Style="{StaticResource EllipseHint}"
                         Grid.Column="4"
                         Visibility="{Binding ButtonHelpVisibility , UpdateSourceTrigger=PropertyChanged}">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="{StaticResource HelpImageXaml}"/>
-                        </Ellipse.Fill>
-                        <Ellipse.InputBindings>
-                            <MouseBinding Command ="{Binding DisplayHintCommand}"  MouseAction="LeftClick"/>
-                        </Ellipse.InputBindings>
-                    </Ellipse>
-                    <Ellipse 
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{StaticResource HelpImageXaml}"/>
+                            </Ellipse.Fill>
+                            <Ellipse.InputBindings>
+                                <MouseBinding Command ="{Binding DisplayHintCommand}"  MouseAction="LeftClick"/>
+                            </Ellipse.InputBindings>
+                        </Ellipse>
+                        <Ellipse 
                         Style="{StaticResource RepeatSoundFile}" 
                         Grid.Column="4"
                         Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="/Data/image/sound.png"/>
-                        </Ellipse.Fill>
-                        <Ellipse.InputBindings>
-                            <MouseBinding Command ="{Binding RepeatSoundFileCommand}"  MouseAction="LeftClick"/>
-                        </Ellipse.InputBindings>
-                    </Ellipse>
-                </Grid>
-            </Border>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Data/image/sound.png"/>
+                            </Ellipse.Fill>
+                            <Ellipse.InputBindings>
+                                <MouseBinding Command ="{Binding RepeatSoundFileCommand}"  MouseAction="LeftClick"/>
+                            </Ellipse.InputBindings>
+                        </Ellipse>
+                    </Grid>
+                </Border>
 
 
-            <Border
+                <Border
                 Grid.Row="3"
                 Style="{StaticResource EnteringAnAnswerBorder}"
-                Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}"
-                >
-
-                <TextBox Style="{StaticResource EnteringAnAnswer}" 
+                Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox Style="{StaticResource EnteringAnAnswer}" 
                      Text="{Binding TexBoxAnswer, UpdateSourceTrigger=PropertyChanged}">
-                    <TextBox.InputBindings>
-                        <KeyBinding Command="{Binding ClickButtonCheckCommand}" Key="Enter" />
-                        <KeyBinding Command="{Binding DisplayHintCommand}" Key="F1" />
-                        <KeyBinding Command="{Binding RepeatSoundFileCommand}" Key="F2" />
-                    </TextBox.InputBindings>
-                </TextBox>
-            </Border>
-            <Button Style="{StaticResource CheckAnswer}"
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding ClickButtonCheckCommand}" Key="Enter" />
+                            <KeyBinding Command="{Binding DisplayHintCommand}" Key="F1" />
+                            <KeyBinding Command="{Binding RepeatSoundFileCommand}" Key="F2" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </Border>
+                <Button Style="{StaticResource CheckAnswer}"
                     Command="{Binding ClickButtonCheckCommand}"
                     Content="{Binding ButtomTextChexkAnsver, UpdateSourceTrigger=PropertyChanged}" 
                     Grid.Row="4" 
                     Foreground="Green"
                     ></Button>
-            <TextBlock x:Name="Timer"
+                <TextBlock x:Name="Timer"
                        Grid.Row="6" 
                        Foreground="Green"> 00:15</TextBlock>
-        </Grid>
-    </DockPanel>
+            </Grid>
+        </Border>
+        <!--#endregion-->
+
+
+        <!--#region status bar-->
+        <StatusBar  
+            Grid.Row="2" 
+            Grid.ColumnSpan="3"        
+            Style="{StaticResource StatusBarStyle}" 
+            Height="30" 
+            VerticalAlignment="Center">
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
+            </StatusBarItem>
+            <StatusBarItem>
+
+            </StatusBarItem>
+        </StatusBar>
+        <!--#endregion-->
+        
+        
+        <!--#region Setting table-->
+        <Border  
+            Grid.Column="1" 
+            Grid.ColumnSpan="2">
+            <Grid >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="160"></ColumnDefinition>
+                    <ColumnDefinition Width="140"></ColumnDefinition>
+                    <ColumnDefinition Width="105"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="97"></ColumnDefinition>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label Grid.Column="0"
+                   Content="Table name" 
+                   VerticalAlignment="Center"
+                   FontSize="20" HorizontalAlignment="Left" Height="42" Width="110" />
+                <ComboBox
+                    
+                    FontSize="20"
+                    Grid.Column="1"
+                    ItemsSource="{Binding DB.NamesTable, UpdateSourceTrigger=PropertyChanged}"
+                    IsSynchronizedWithCurrentItem="True"  
+                    SelectedItem="0"
+                    SelectedValue="{Binding DB.NameTable, UpdateSourceTrigger=PropertyChanged}"
+                    Width="130" 
+                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Grid.Column="2"
+                    Content="Satrt Index"   
+                    FontSize="20" Margin="0,-5,0,0" 
+                    HorizontalAlignment="Left" Width="105"/>
+                <TextBox  Grid.Column="3"
+                    Width="80" 
+                    Text="{Binding DB.StartIndex, UpdateSourceTrigger=PropertyChanged}" 
+                    InputScope="Number" 
+                    HorizontalAlignment="Left" TextAlignment="Center" FontSize="20" />
+                <Label  Grid.Column="4"
+                    Content="End Index"
+                    Width="98"  
+                    FontSize="20" 
+                    Margin="0,-5,0,0" 
+                    HorizontalAlignment="Center"/>
+                <TextBox
+                    Width="80"
+                    Grid.Column="5"
+                    TextAlignment="Center" 
+                          FontSize="20" 
+                    Text="{Binding DB.EndIndex, UpdateSourceTrigger=PropertyChanged}" 
+                    InputScope="Number" />
+            </Grid>
+        </Border>
+        <!--#endregion-->
+    </Grid>
 </Window>
