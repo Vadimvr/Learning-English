@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace LElWPF.Core.Models.db
 {
@@ -18,6 +19,7 @@ namespace LElWPF.Core.Models.db
             {
                 nameTable = value;
                 GetCountDB();
+                EndIndex = maxEndIndex;
                 StartIndex = 1;
             }
         }
@@ -29,19 +31,49 @@ namespace LElWPF.Core.Models.db
             get => startIndex;
             set
             {
-                if (value >= 1 && value < EndIndex)
-                    startIndex = value;
+                if (value < 1)
+                    value = 1;
+                if (value > endIndex)
+                {
+                    if (value <= maxEndIndex)
+                    {
+                        EndIndex = value;
+                    }
+                    else
+                    {
+                        value = maxEndIndex;
+                        EndIndex = value;
+                    }
+                }
+                startIndex = value;
             }
-        } 
+        }
 
         int maxEndIndex;
         int endIndex;
         public int EndIndex
         {
-            get => endIndex; set
+            get => endIndex;
+            set
             {
-                if (value > startIndex && value <= maxEndIndex)
-                    endIndex = value;
+                if (value > maxEndIndex)
+                {
+                    value = maxEndIndex;
+                }
+
+                if (value < startIndex)
+                {
+                    if (value >= 1)
+                    {
+                        startIndex = value;
+                    }
+                    else
+                    {
+                        value = 1;
+                        StartIndex = value;
+                    }
+                }
+                endIndex = value;
             }
         }
         public RandomValueFromTable(string path, string dbname)
@@ -62,23 +94,30 @@ namespace LElWPF.Core.Models.db
 
         void GetCountDB()
         {
-            using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
+            try
             {
-                db.Open();
-                SqliteCommand selectCommand = new SqliteCommand($"SELECT COUNT(*) FROM {NameTable}", db);
+                using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
+                {
+                    db.Open();
+                    SqliteCommand selectCommand = new SqliteCommand($"SELECT COUNT(*) FROM {NameTable}", db);
 
-                SqliteDataReader query = selectCommand.ExecuteReader();
-                query.Read();
-                maxEndIndex = 0;
-                int.TryParse(query.GetString(0).ToString(), out maxEndIndex);
-                EndIndex = maxEndIndex;
-                db.Close();
+                    SqliteDataReader query = selectCommand.ExecuteReader();
+                    query.Read();
+                    maxEndIndex = 0;
+                    int.TryParse(query.GetString(0).ToString(), out maxEndIndex);
+                    EndIndex = maxEndIndex;
+                    db.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error " + ex.Message);
             }
         }
 
-        public Values GetRandomValues(string nemetable)
+        public Values GetRandomValues(string nametable)
         {
-            NameTable = nemetable;
+            NameTable = nametable;
             StartIndex = 1;
             GetCountDB();
             return GetRandomValues();
@@ -104,8 +143,9 @@ namespace LElWPF.Core.Models.db
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Error " + ex.Message);
                 StartIndex = 1;
-                return new Values("err", "errr", ex.Message, PathDB);
+                return new Values("", "", ex.Message, PathDB);
             }
         }
     }
