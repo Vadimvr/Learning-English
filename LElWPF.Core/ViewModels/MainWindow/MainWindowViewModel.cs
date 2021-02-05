@@ -12,11 +12,7 @@ namespace LElWPF.Core.ViewModels
         public MainWindowViewModel()
         {
             FileFound = File.Exists(StaticPath+ StaticName);
-
-
             Status = StaticPath;
-
-
             try
             {
                 if (FileFound)
@@ -38,6 +34,7 @@ namespace LElWPF.Core.ViewModels
             DisplayHintCommand = new LambdaCommand(OnDisplayHintCommandExecuted, CanDisplayHintCommandExecute);
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
             ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
+            NewNameCommand = new LambdaCommand(OnNewNameCommandExecuted, CanNewNameCommandExecute);
         }
     }
 }

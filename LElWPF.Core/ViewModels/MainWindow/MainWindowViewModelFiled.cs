@@ -2,21 +2,26 @@
 using LElWPF.Core.Models.db;
 using LElWPF.Core.ViewModels.Base;
 using LElWPF.Core.ViewModels.Windows;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 
 namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
-        public bool FileFound { get; set; } = false;
-
-        #region Filed
-
+       
+        bool FirstRun { get; set; } = true;
         private MediaPlayer mediaPlayer = new MediaPlayer();
         IDialogService dialogService = new DefaultDialogService();
-        RandomValueFromTable DB;
+        public bool FileFound { get; set; } = false;
+        //#region DB
 
-        bool FirstRun { get; set; } = true;
+        private RandomValueFromTable _DB;
+        public RandomValueFromTable DB { get => _DB; set => Set(ref _DB, value); }
+
+
+        #region Filed
 
         #region RandomValues
 
@@ -24,7 +29,7 @@ namespace LElWPF.Core.ViewModels
         public Values RandomValues { get => _RandomValues; set => Set(ref _RandomValues, value); }
 
         #endregion
-
+        
         #region Title
         private string _Title = "Learning English language";
         public string Title { get => _Title; set => Set(ref _Title, value); }
@@ -54,7 +59,5 @@ namespace LElWPF.Core.ViewModels
         #endregion
 
         #endregion
-
-
     }
 }
