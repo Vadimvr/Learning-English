@@ -1,27 +1,66 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 namespace LElWPF.Core.Models.db
 {
     class RandomValueFromTable
     {
         Random rnd = new Random();
-        public SqliteConnectionStringBuilder connectionStringBuilder { get; set; }
         string PathDB { get; set; }
         string NameDB { get; set; }
-        string NameTable{ get; set; }
-        public int SatrtIndex { get; set; } = 1;
-        public int EndIndex { get; set; }
+        string nameTable;
+        public string NameTable
+        {
+            get => nameTable;
+            set
+            {
+                nameTable = value;
+                GetCountDB();
+                StartIndex = 1;
+            }
+        }
+        public ObservableCollection<string> NamesTable { get; set; }
+
+        int startIndex = 1;
+        public int StartIndex
+        {
+            get => startIndex;
+            set
+            {
+                if (value >= 1 && value < EndIndex)
+                    startIndex = value;
+            }
+        } 
+
+        int maxEndIndex;
+        int endIndex;
+        public int EndIndex
+        {
+            get => endIndex; set
+            {
+                if (value > startIndex && value <= maxEndIndex)
+                    endIndex = value;
+            }
+        }
         public RandomValueFromTable(string path, string dbname)
         {
             PathDB = path;
             NameDB = dbname;
             ReceivingDataFromSQlite receivingDataFromSQlite = new ReceivingDataFromSQlite(PathDB, NameDB);
-            NameTable = receivingDataFromSQlite.GetTablesNames()[0];
-            connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = PathDB + NameDB;
+            NamesTable = new ObservableCollection<string>(receivingDataFromSQlite.GetTablesNames());
+            NameTable = NamesTable[0];
+            GetCountDB();
+            StartIndex = 1;
+        }
+        public RandomValueFromTable(string nameTAble)
+        {
+            NameTable = nameTAble;
             GetCountDB();
         }
-        void GetCountDB(string tablename = "Values1")
+
+        void GetCountDB()
         {
             using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
             {
@@ -30,39 +69,44 @@ namespace LElWPF.Core.Models.db
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
                 query.Read();
-                int x = 0;
-                int.TryParse(query.GetString(0).ToString(), out x);
-                EndIndex = x;
-                db.Close(); 
+                maxEndIndex = 0;
+                int.TryParse(query.GetString(0).ToString(), out maxEndIndex);
+                EndIndex = maxEndIndex;
+                db.Close();
             }
         }
 
-        public Values GetRandomValues(string tablename = "Values1")
+        public Values GetRandomValues(string nemetable)
         {
-            //int random = rnd.Next(SatrtIndex, EndIndex); 
+            NameTable = nemetable;
+            StartIndex = 1;
+            GetCountDB();
+            return GetRandomValues();
+        }
 
-            int random = SatrtIndex++;
+        public Values GetRandomValues()
+        {
             try
             {
+                int random = rnd.Next(StartIndex, EndIndex);
                 Values values;
-                using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
+
+                using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
                 {
-                    connection.Open();
-                    SqliteCommand selectCommand = new SqliteCommand($"SELECT eng, engt, rus   FROM {NameTable} WHERE id={random}", connection);
+                    db.Open();
+                    SqliteCommand selectCommand = new SqliteCommand($"SELECT eng, engt, rus   FROM {NameTable} WHERE id={random}", db);
                     SqliteDataReader query = selectCommand.ExecuteReader();
                     query.Read();
                     values = new Values(query.GetString(0), query.GetString(1), query.GetString(2), PathDB);
-                    connection.Close();
+                    db.Close();
                 }
                 return values;
             }
-            catch
+            catch (Exception ex)
             {
-                SatrtIndex = 1;
-                return new Values("err", "errr", "errr", PathDB);
+                StartIndex = 1;
+                return new Values("err", "errr", ex.Message, PathDB);
             }
-
         }
-
     }
 }
