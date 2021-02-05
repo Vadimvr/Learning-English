@@ -147,8 +147,8 @@
                         </Border>
                         <Ellipse 
                         Style="{StaticResource EllipseHint}"
-                        Grid.Column="4">
-                            <!--Visibility="{Binding ButtonHelpVisibility , UpdateSourceTrigger=PropertyChanged}">-->
+                        Grid.Column="4"
+                            Visibility="{Binding ButtonHelpVisibility , UpdateSourceTrigger=PropertyChanged}">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{StaticResource HelpImageXaml}"/>
                             </Ellipse.Fill>
@@ -158,8 +158,8 @@
                         </Ellipse>
                         <Ellipse 
                         Style="{StaticResource RepeatSoundFile}" 
-                        Grid.Column="4">
-                            <!--Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">-->
+                        Grid.Column="4"
+                            Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="/Data/image/sound.png"/>
                             </Ellipse.Fill>
@@ -169,26 +169,26 @@
                         </Ellipse>
                         <Rectangle 
                         Style="{StaticResource RectangleNewImgFile}" 
-                        Grid.Column="5" Margin="80,0,0,0">
-                            <!--Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">-->
+                        Grid.Column="5" Margin="80,0,0,0"
+                            Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Data/image/jpg-512.png"/>
                             </Rectangle.Fill>
                             <Rectangle.InputBindings>
-                                <MouseBinding Command ="{Binding DowlandNewImage}"  MouseAction="LeftClick"/>
+                                <MouseBinding Command ="{Binding OpenImageLinkInBrowserCommand}"  MouseAction="LeftClick"/>
                             </Rectangle.InputBindings>
                         </Rectangle>
 
                         <Rectangle 
                         Style="{StaticResource RectangleNewSomgFile}" 
                         
-                        Grid.Column="5">
-                            <!--Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">-->
+                        Grid.Column="5"
+                            Visibility="{Binding FirstStartApp , UpdateSourceTrigger=PropertyChanged}">
                             <Rectangle.Fill>
                                 <ImageBrush ImageSource="/Data/image/301736-200.png"/>
                             </Rectangle.Fill>
                             <Rectangle.InputBindings>
-                                <MouseBinding Command ="{Binding DowlandNewSong}"  MouseAction="LeftClick"/>
+                                <MouseBinding Command ="{Binding OpenSongLinkInBrowserCommand}"  MouseAction="LeftClick"/>
                             </Rectangle.InputBindings>
                         </Rectangle>
                     </Grid>

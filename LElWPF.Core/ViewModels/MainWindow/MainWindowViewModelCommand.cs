@@ -11,6 +11,57 @@ namespace LElWPF.Core.ViewModels
     {
         #region Commands
 
+        #region OpenImageLinkInBrowserCommand
+
+        public ICommand OpenImageLinkInBrowserCommand { get; }
+
+        private bool CanOpenImageLinkInBrowserCommandExecute(object p) => true;
+        private void OnOpenImageLinkInBrowserCommandExecuted(object p)
+        {
+            if (RandomValues != null)
+            {
+                var destinationurl = $"https://www.google.com/search?q={RandomValues.Eng}+clipart&tbm=isch";
+                var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl)
+                {
+                    UseShellExecute = true,
+                };
+                System.Diagnostics.Process.Start(sInfo);
+            }
+        }
+
+
+        #endregion
+
+        #region OpenSongLinkInBrowserCommand
+
+        public ICommand OpenSongLinkInBrowserCommand { get; }
+
+        private bool CanOpenSongLinkInBrowserCommandExecute(object p) => true;
+        private void OnOpenSongLinkInBrowserCommandExecuted(object p)
+        {
+            if (RandomValues != null)
+            {
+                var destinationurl = $"https://forvo.com/search/{RandomValues.Eng}/en/";
+                var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl)
+                {
+                    UseShellExecute = true,
+                };
+                System.Diagnostics.Process.Start(sInfo);
+            }
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
         #region NewNameCommand
 
         public ICommand NewNameCommand { get; }
@@ -53,8 +104,8 @@ namespace LElWPF.Core.ViewModels
                         StaticName = dialogService.File;
                         DB = new RandomValueFromTable(StaticPath, StaticName);
                         NamesTable = DB.NamesTable;
-                        DB.NameTable = SelectedTable; 
-                        
+                        DB.NameTable = SelectedTable;
+
                         FileFound = true;
                     }
                     catch (System.Exception ex)
@@ -121,14 +172,14 @@ namespace LElWPF.Core.ViewModels
                 // disabled сhecking the correct answer
                 //if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
                 //{
-                    ButtonHelpVisibility = Visibility.Visible;
-                    BorderHintVisibility = Visibility.Collapsed;
-                    RandomValues = DB.GetRandomValues();
-                    TexBoxAnswer = "";
-                    mediaPlayer.Stop();
-                    mediaPlayer.Open(new Uri(RandomValues.Song));
-                    mediaPlayer.Play();
-               // }
+                ButtonHelpVisibility = Visibility.Visible;
+                BorderHintVisibility = Visibility.Collapsed;
+                RandomValues = DB.GetRandomValues();
+                TexBoxAnswer = "";
+                mediaPlayer.Stop();
+                mediaPlayer.Open(new Uri(RandomValues.Song));
+                mediaPlayer.Play();
+                // }
             }
         }
         #endregion
