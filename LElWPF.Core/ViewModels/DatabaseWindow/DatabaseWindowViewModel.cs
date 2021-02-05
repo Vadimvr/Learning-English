@@ -19,6 +19,14 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         public FullBase AllDB { get => _AllDB; set => Set(ref _AllDB, value); }
 
         #endregion
+        #region SelectedItem
+
+        private int _SelectedItem = 0;
+        public int SelectedItem { get => _SelectedItem; set => Set(ref _SelectedItem, value); }
+
+        #endregion
+
+
 
         #region SelectedTable
 
@@ -40,6 +48,24 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         public Values AddValueTemp { get => _AddValueTemp; set => Set(ref _AddValueTemp, value); }
 
         #endregion
+
+        #region SaveAllTablesCommand
+
+        public ICommand SaveAllTablesCommand { get; }
+
+        private bool CanSaveAllTablesCommandExecute(object p) => true;
+        private void OnSaveAllTablesCommandExecuted(object p)
+        {
+            int tem  = SelectedItem;
+            AllDB.SaveAllTeble();
+            AllDB = new FullBase(StaticPath, StaticName);
+            SelectedItem = tem;
+        }
+      
+        #endregion
+
+
+
 
         #region AddValuesCommand
 
@@ -127,7 +153,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         {
 
             CreadeValuesCommand = new LambdaCommand(OnCreadeValuesCommandExecuted, CanCreadeValuesCommandExecute);
-
+            SaveAllTablesCommand = new LambdaCommand(OnSaveAllTablesCommandExecuted, CanSaveAllTablesCommandExecute);
             AddValuesCommand = new LambdaCommand(OnAddValuesCommandExecuted, CanAddValuesCommandExecute);
             DeleteValueCommand = new LambdaCommand(OnDeleteValueCommandExecuted, CanDeleteValueCommandExecute);
             DeleteTableCommand = new LambdaCommand(OnDeleteTableCommandExecuted, CanDeleteTableCommandExecute);

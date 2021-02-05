@@ -38,5 +38,12 @@ namespace LElWPF.Core.Models.db
             if (temp)
                 AllTables.Add(new TableInDB(nameTable, new List<Values>(), Path,Name, сreationTableInDB));
         }
+        public void SaveAllTeble()
+        {
+            foreach (var item in AllTables)
+            {
+                item.SeveTable();
+            }
+        }
     }
 }

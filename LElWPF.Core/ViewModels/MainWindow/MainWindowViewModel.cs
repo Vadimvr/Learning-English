@@ -11,7 +11,9 @@ namespace LElWPF.Core.ViewModels
    
         public MainWindowViewModel()
         {
-            FileFound = File.Exists(StaticPath+ StaticName);
+            StaticPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            StaticName = "data.db";
+            FileFound = File.Exists(StaticPath + StaticName);
             Status = StaticPath;
             try
             {
@@ -22,7 +24,7 @@ namespace LElWPF.Core.ViewModels
                 }
                 else
                 {
-                    Status =  "Not found " + StaticPath + StaticName; 
+                    Status = System.AppDomain.CurrentDomain.BaseDirectory; 
                 }
             }
             catch (System.Exception ex)
