@@ -106,7 +106,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         {
 
             SelectedTable.SeveTable();
-            AllDB = new FullBase(@"D:\test\", "test2.db");
+            AllDB = new FullBase(StaticPath, StaticName);
         }
 
         #endregion
@@ -119,7 +119,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         private void OnDeleteTableCommandExecuted(object p)
         {
             SelectedTable.DeleteTable();
-            AllDB = new FullBase(@"D:\test\", "test2.db");
+            AllDB = new FullBase(StaticPath,StaticName);
         }
         #endregion
 
