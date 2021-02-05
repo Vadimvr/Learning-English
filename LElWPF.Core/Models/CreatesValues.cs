@@ -5,8 +5,8 @@
         public CreatesValues() { }
         public static Values CredeData(string stringFromDB, string path)
         {
-            string id = "";
-            string rus = "";
+            //string id = "";
+            //string rus = "";
             string eng = "";
             string engT = "";
             int temp = 0;

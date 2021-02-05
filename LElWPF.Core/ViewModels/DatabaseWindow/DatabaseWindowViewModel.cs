@@ -13,8 +13,6 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 {
     class DatabaseWindowViewModel : ViewModel
     {
-        // public ObservableCollection<TableInDB> AllDB { get; private set; }
-
         #region AllDB
 
         private FullBase _AllDB;
@@ -22,39 +20,17 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 
         #endregion
 
-
-        ReceivingDataFromSQlite сreationTableInDB;
-
         #region SelectedTable
 
         private TableInDB _SelectedTable;
-        public TableInDB SelectedTable
-        {
-            get => _SelectedTable;
-            set => Set(ref _SelectedTable, value);
-        }
+        public TableInDB SelectedTable { get => _SelectedTable; set => Set(ref _SelectedTable, value); }
 
         #endregion
 
         #region SelectedValue
 
         private Values _SelectedValue;
-        public Values SelectedValue
-        {
-            get
-            {
-                //if (_SelectedValue != null)
-                //    AddValueTemp = new Values(SelectedValue.Eng, SelectedValue.EngTranscription, SelectedValue.Rus);
-                return _SelectedValue;
-            }
-
-            set 
-            {
-                
-                Set(ref _SelectedValue, value);
-
-            }
-        }
+        public Values SelectedValue { get => _SelectedValue; set => Set(ref _SelectedValue, value); }
 
         #endregion
 
@@ -65,7 +41,6 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 
         #endregion
 
-
         #region AddValuesCommand
 
         public ICommand AddValuesCommand { get; }
@@ -73,9 +48,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         private bool CanAddValuesCommandExecute(object p) => true;
         private void OnAddValuesCommandExecuted(object p)
         {
-            
             SelectedTable.Values.Add(new Values(AddValueTemp.Eng, AddValueTemp.EngTranscription, AddValueTemp.Rus));
-          //  SelectedTable = new TableInDB (SelectedTable);
         }
 
         #endregion
@@ -92,6 +65,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         }
 
         #endregion
+
         #region DeleteValueCommand
 
         public ICommand DeleteValueCommand { get; }
@@ -103,12 +77,14 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         }
 
         #endregion
+
         #region NameNewTable
 
         private string _NameNewTable;
         public string NameNewTable { get => _NameNewTable; set => Set(ref _NameNewTable, value); }
 
         #endregion
+
         #region AddNewTableCommand
 
         public ICommand AddNewTableCommand { get; }
@@ -120,6 +96,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         }
 
         #endregion
+
         #region SaveTablesCommand
 
         public ICommand SaveTablesCommand { get; }
@@ -127,7 +104,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
         private bool CanSaveTablesCommandExecute(object p) => true;
         private void OnSaveTablesCommandExecuted(object p)
         {
-            
+
             SelectedTable.SeveTable();
             AllDB = new FullBase(@"D:\test\", "test2.db");
         }
@@ -156,8 +133,6 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
             DeleteTableCommand = new LambdaCommand(OnDeleteTableCommandExecuted, CanDeleteTableCommandExecute);
             SaveTablesCommand = new LambdaCommand(OnSaveTablesCommandExecuted, CanSaveTablesCommandExecute);
             AddNewTableCommand = new LambdaCommand(OnAddNewTableCommandExecuted, CanAddNewTableCommandExecute);
-
-            //сreationTableInDB = new ReceivingDataFromSQlite(@"D:\test\", "t.db");
             AllDB = new FullBase(StaticPath, StaticName);
         }
     }
