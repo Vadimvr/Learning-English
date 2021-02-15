@@ -15,8 +15,8 @@
         {
             Rus = wordRus;
             Eng = wordEng;
-            Song =path + $@"song\{wordEng}.mp3";
-            Img =path + $@"img\{wordEng}.jpg";
+            Song =path + $@"data\pronunciation_en_{wordEng.ToLower().Replace(' ','_').Replace('!', '_').Replace('?', '_')}.mp3";
+            Img =path + $@"data\{wordEng.ToLower().Replace('!', '_').Replace('?', '_')}.jpg";
             EngTranscription = transcription;
         }
         public Values(string wordEng, string transcription, string wordRus)
