@@ -11,6 +11,9 @@ namespace LElWPF.Core.Models.db
         Random rnd = new Random();
         string PathDB { get; set; }
         string NameDB { get; set; }
+        public bool Accidentally { get; set; } = true;
+        int random;
+        public int PandomInt { get => random; private set => random = value; }
         string nameTable;
         public string NameTable
         {
@@ -125,15 +128,23 @@ namespace LElWPF.Core.Models.db
 
         public Values GetRandomValues()
         {
+            random = rnd.Next(StartIndex, EndIndex + 1);
+            return GetValues(random);
+        }
+        public Values GetNextValues()
+        {
+            random = random + 1 <= EndIndex ? random + 1 : StartIndex;
+            return GetValues(random);
+        }
+        Values GetValues(int inex)
+        {
             try
             {
-                int random = rnd.Next(StartIndex, EndIndex);
                 Values values;
-
                 using (SqliteConnection db = new SqliteConnection($"Filename={PathDB + NameDB}"))
                 {
                     db.Open();
-                    SqliteCommand selectCommand = new SqliteCommand($"SELECT eng, engt, rus   FROM {NameTable} WHERE id={random}", db);
+                    SqliteCommand selectCommand = new SqliteCommand($"SELECT eng, engt, rus   FROM {NameTable} WHERE id={inex}", db);
                     SqliteDataReader query = selectCommand.ExecuteReader();
                     query.Read();
                     values = new Values(query.GetString(0), query.GetString(1), query.GetString(2), PathDB);
