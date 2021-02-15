@@ -11,7 +11,7 @@ namespace LElWPF.Core.ViewModels
    
         public MainWindowViewModel()
         {
-            StaticPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
             StaticName = "data.db";
             FileFound = File.Exists(StaticPath + StaticName);
             Status = StaticPath;
@@ -21,6 +21,7 @@ namespace LElWPF.Core.ViewModels
                 {
                     DB = new RandomValueFromTable(StaticPath , StaticName);
                     RandomValues = DB.GetRandomValues();
+                    NamesTable = DB.NamesTable;
                 }
                 else
                 {
@@ -31,6 +32,8 @@ namespace LElWPF.Core.ViewModels
             {
                 Status = ex.Message;
             }
+            
+            AccidentallyCommand = new LambdaCommand(OnAccidentallyCommandExecuted, CanAccidentallyCommandExecute);
             OpenSongLinkInBrowserCommand = new LambdaCommand(OnOpenSongLinkInBrowserCommandExecuted, CanOpenSongLinkInBrowserCommandExecute);
             OpenImageLinkInBrowserCommand = new LambdaCommand(OnOpenImageLinkInBrowserCommandExecuted, CanOpenImageLinkInBrowserCommandExecute);
             OpenDatabaseWindowCommand = new LambdaCommand(OnOpenDatabaseWindowCommandExecuted, CanOpenDatabaseWindowCommandExecute);
@@ -39,6 +42,7 @@ namespace LElWPF.Core.ViewModels
             RepeatSoundFileCommand = new LambdaCommand(OnRepeatSoundFileCommandExecuted, CanRepeatSoundFileCommandExecute);
             ClickButtonCheckCommand = new LambdaCommand(OnClickButtonCheckCommandExecuted, CanClickButtonCheckCommandExecute);
             NewNameCommand = new LambdaCommand(OnNewNameCommandExecuted, CanNewNameCommandExecute);
+            DoNotCheckAnswersCommand = new LambdaCommand(OnDoNotCheckAnswersCommandExecuted, CanDoNotCheckAnswersCommandExecute);
         }
     }
 }

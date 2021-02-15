@@ -11,5 +11,7 @@ namespace LElWPF.Core
         {
             InitializeComponent();
         }
+
+       
     }
 }

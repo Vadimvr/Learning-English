@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>Learning English language</AssemblyName>
+    <ApplicationIcon>united_kingdom_flag.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

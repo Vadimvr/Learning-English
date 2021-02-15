@@ -10,6 +10,14 @@ namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
+        #region Accidentally
+
+        private bool _Accidentally;
+        public bool Accidentally { get => _Accidentally; set => Set(ref _Accidentally, value); }
+
+        #endregion
+
+
 
         bool FirstRun { get; set; } = true;
         private MediaPlayer mediaPlayer = new MediaPlayer();
@@ -26,8 +34,17 @@ namespace LElWPF.Core.ViewModels
         private ObservableCollection<string> _NamesTable;
         public ObservableCollection<string> NamesTable { get => _NamesTable; set => Set(ref _NamesTable, value); }
 
-       
+
         #endregion
+
+        #region DoNotCheckAnswers
+
+        private bool _DoNotCheckAnswers;
+        public bool DoNotCheckAnswers { get => _DoNotCheckAnswers; set => Set(ref _DoNotCheckAnswers, value); }
+
+        #endregion
+
+
 
         #region SelectedTable
 

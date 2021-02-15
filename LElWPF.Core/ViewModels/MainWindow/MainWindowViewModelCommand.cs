@@ -10,6 +10,32 @@ namespace LElWPF.Core.ViewModels
     partial class MainWindowViewModel : ViewModel
     {
         #region Commands
+        #region AccidentallyCommand
+
+        public ICommand AccidentallyCommand { get; }
+
+        private bool CanAccidentallyCommandExecute(object p) => true;
+        private void OnAccidentallyCommandExecuted(object p)
+        {
+            Accidentally = !Accidentally;
+        }
+        
+        #endregion
+
+
+
+
+        #region DoNotCheckAnswersCommand
+
+        public ICommand DoNotCheckAnswersCommand { get; }
+
+        private bool CanDoNotCheckAnswersCommandExecute(object p) => true;
+        private void OnDoNotCheckAnswersCommandExecuted(object p)
+        {
+            DoNotCheckAnswers = !DoNotCheckAnswers;
+        }
+        
+        #endregion
 
         #region OpenImageLinkInBrowserCommand
 
@@ -20,12 +46,13 @@ namespace LElWPF.Core.ViewModels
         {
             if (RandomValues != null)
             {
-                var destinationurl = $"https://www.google.com/search?q={RandomValues.Eng}+clipart&tbm=isch";
+                var destinationurl = $"https://www.google.com/search?q={RandomValues.Eng.ToLower().Replace('!', '_')}+clipart&tbm=isch";
                 var sInfo = new System.Diagnostics.ProcessStartInfo(destinationurl)
                 {
                     UseShellExecute = true,
                 };
                 System.Diagnostics.Process.Start(sInfo);
+                Clipboard.SetText($"{RandomValues.Eng.ToLower().Replace('!', '_').Replace('?', '_')}.jpg");
             }
         }
 
@@ -52,16 +79,6 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-
-
-
-
-
-
-
-
-
-
         #region NewNameCommand
 
         public ICommand NewNameCommand { get; }
@@ -81,6 +98,7 @@ namespace LElWPF.Core.ViewModels
         private bool CanOpenDatabaseWindowCommandExecute(object p) => FileFound;
         private void OnOpenDatabaseWindowCommandExecuted(object p)
         {
+
             Views.Windows.DatabaseWindow databaseWindow = new Views.Windows.DatabaseWindow();
             databaseWindow.Show();
         }
@@ -107,6 +125,7 @@ namespace LElWPF.Core.ViewModels
                         DB.NameTable = SelectedTable;
 
                         FileFound = true;
+                        Status = StaticName;
                     }
                     catch (System.Exception ex)
                     {
@@ -170,16 +189,23 @@ namespace LElWPF.Core.ViewModels
             else
             {
                 // disabled сhecking the correct answer
-                //if (TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
-                //{
-                ButtonHelpVisibility = Visibility.Visible;
-                BorderHintVisibility = Visibility.Collapsed;
-                RandomValues = DB.GetRandomValues();
-                TexBoxAnswer = "";
-                mediaPlayer.Stop();
-                mediaPlayer.Open(new Uri(RandomValues.Song));
-                mediaPlayer.Play();
-                // }
+                if (DoNotCheckAnswers ||TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
+                {
+                    Status = "Right";
+                    ButtonHelpVisibility = Visibility.Visible;
+                    BorderHintVisibility = Visibility.Collapsed;
+
+                    RandomValues = Accidentally ? DB.GetRandomValues():DB.GetNextValues();
+                    TexBoxAnswer = "";
+                    mediaPlayer.Stop();
+                    mediaPlayer.Open(new Uri(RandomValues.Song));
+                    mediaPlayer.Play();
+                }
+
+                else
+                {
+                    Status = "mistake";
+                }
             }
         }
         #endregion

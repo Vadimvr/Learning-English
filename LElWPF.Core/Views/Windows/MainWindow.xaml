@@ -70,22 +70,23 @@
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="124*"></ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="743*"></ColumnDefinition>
             <ColumnDefinition Width="433*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <!--#region menu-->
         <Menu  Grid.Column="0" Grid.ColumnSpan="3"
+               
               Style="{StaticResource MenuStyle}" >
-            <MenuItem Header="Menu"  
-                      Style="{StaticResource MenuStyle}">
-                <MenuItem Header="Create profile" 
+            <MenuItem Header="Menu"
+                      Style="{StaticResource MenuStyle}" >
+                <!--<MenuItem Header="Create profile" 
                           Style="{StaticResource MenuItemStyle}">
                 </MenuItem>
                 <MenuItem Header="Open profile" 
                           Style="{StaticResource MenuItemStyle}">
-                </MenuItem>
+                </MenuItem>-->
                 <MenuItem Header="Save profile" 
                           Style="{StaticResource MenuItemStyle}"/>
                 <MenuItem Header="Open dictionary" 
@@ -94,6 +95,38 @@
                 <MenuItem Header="Сreate a dictionary" 
                           Style="{StaticResource MenuItemStyle}"
                           Command="{Binding OpenDatabaseWindowCommand}"/>
+
+                
+                
+            </MenuItem>
+
+            <MenuItem Header="Setting">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Do not check answers">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command ="{Binding DoNotCheckAnswersCommand}"  MouseAction="LeftClick"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <CheckBox IsChecked="{Binding DoNotCheckAnswers}" Grid.Column="1" Margin="5,7" />
+                </Grid>
+                
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                    <TextBlock Text="Accidentally">
+                            <TextBlock.InputBindings>
+                            <MouseBinding Command ="{Binding AccidentallyCommand}"  MouseAction="LeftClick"/>
+                            </TextBlock.InputBindings>
+                        </TextBlock>
+                    <CheckBox IsChecked="{Binding Accidentally}" Grid.Column="1" Margin="5,7" />
+                    </Grid>
+                
             </MenuItem>
         </Menu>
         <!--#endregion-->
@@ -232,7 +265,7 @@
             <StatusBarItem>
                 <TextBlock Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
             </StatusBarItem>
-            <StatusBarItem>
+            <StatusBarItem  >
 
             </StatusBarItem>
         </StatusBar>
