@@ -10,6 +10,22 @@ namespace LElWPF.Core.ViewModels
     partial class MainWindowViewModel : ViewModel
     {
         #region Commands
+
+        #region ShowHintCommand
+
+        public ICommand ShowHintCommand { get; }
+
+        private bool CanShowHintCommandExecute(object p) => true;
+        private void OnShowHintCommandExecuted(object p)
+        {
+            ShowHint = !ShowHint;
+        }
+        
+        #endregion
+
+
+
+
         #region AccidentallyCommand
 
         public ICommand AccidentallyCommand { get; }
@@ -184,6 +200,7 @@ namespace LElWPF.Core.ViewModels
                 ButtomTextChexkAnsver = "Check";
                 mediaPlayer.Open(new Uri(RandomValues.Song));
                 mediaPlayer.Play();
+                Status = DB.Index.ToString();
             }
 
             else
@@ -192,14 +209,16 @@ namespace LElWPF.Core.ViewModels
                 if (DoNotCheckAnswers ||TexBoxAnswer.ToLower().Trim() == RandomValues.Eng.ToLower().Trim())
                 {
                     Status = "Right";
-                    ButtonHelpVisibility = Visibility.Visible;
-                    BorderHintVisibility = Visibility.Collapsed;
+                    ButtonHelpVisibility = ShowHint ?  Visibility.Collapsed : Visibility.Visible;
+
+                    BorderHintVisibility = ShowHint ? Visibility.Visible: Visibility.Collapsed;
 
                     RandomValues = Accidentally ? DB.GetRandomValues():DB.GetNextValues();
                     TexBoxAnswer = "";
                     mediaPlayer.Stop();
                     mediaPlayer.Open(new Uri(RandomValues.Song));
                     mediaPlayer.Play();
+                    Status = DB.Index.ToString();
                 }
 
                 else

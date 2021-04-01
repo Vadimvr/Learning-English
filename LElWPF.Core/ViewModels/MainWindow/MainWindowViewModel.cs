@@ -20,7 +20,8 @@ namespace LElWPF.Core.ViewModels
                 if (FileFound)
                 {
                     DB = new RandomValueFromTable(StaticPath , StaticName);
-                    RandomValues = DB.GetRandomValues();
+                    RandomValues = DB.GetNextValues();
+                    Status = DB.Index.ToString();
                     NamesTable = DB.NamesTable;
                 }
                 else
@@ -32,7 +33,8 @@ namespace LElWPF.Core.ViewModels
             {
                 Status = ex.Message;
             }
-            
+
+            ShowHintCommand = new LambdaCommand(OnShowHintCommandExecuted, CanShowHintCommandExecute);
             AccidentallyCommand = new LambdaCommand(OnAccidentallyCommandExecuted, CanAccidentallyCommandExecute);
             OpenSongLinkInBrowserCommand = new LambdaCommand(OnOpenSongLinkInBrowserCommandExecuted, CanOpenSongLinkInBrowserCommandExecute);
             OpenImageLinkInBrowserCommand = new LambdaCommand(OnOpenImageLinkInBrowserCommandExecuted, CanOpenImageLinkInBrowserCommandExecute);

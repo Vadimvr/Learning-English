@@ -96,14 +96,14 @@
                           Style="{StaticResource MenuItemStyle}"
                           Command="{Binding OpenDatabaseWindowCommand}"/>
 
-                
-                
+
+
             </MenuItem>
 
             <MenuItem Header="Setting">
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Do not check answers">
@@ -113,20 +113,32 @@
                     </TextBlock>
                     <CheckBox IsChecked="{Binding DoNotCheckAnswers}" Grid.Column="1" Margin="5,7" />
                 </Grid>
-                
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                    <TextBlock Text="Accidentally">
-                            <TextBlock.InputBindings>
+
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Random words">
+                        <TextBlock.InputBindings>
                             <MouseBinding Command ="{Binding AccidentallyCommand}"  MouseAction="LeftClick"/>
-                            </TextBlock.InputBindings>
-                        </TextBlock>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                     <CheckBox IsChecked="{Binding Accidentally}" Grid.Column="1" Margin="5,7" />
-                    </Grid>
-                
+                </Grid>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Show hint">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command ="{Binding ShowHintCommand}"  MouseAction="LeftClick"/>
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                    <CheckBox IsChecked="{Binding ShowHint}" Grid.Column="1" Margin="5,7" />
+                </Grid>
+
             </MenuItem>
         </Menu>
         <!--#endregion-->

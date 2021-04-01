@@ -10,6 +10,14 @@ namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
+        #region ShowHint
+
+        private bool _ShowHint;
+        public bool ShowHint { get => _ShowHint; set => Set(ref _ShowHint, value); }
+
+        #endregion
+
+
         #region Accidentally
 
         private bool _Accidentally;
@@ -57,7 +65,8 @@ namespace LElWPF.Core.ViewModels
                 DB.NameTable = SelectedTable;
                 StartIndex = DB.StartIndex;
                 EndIndex = DB.EndIndex;
-                RandomValues = DB.GetRandomValues();
+                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues();
+                Status = DB.Index.ToString();
             }
         }
 
@@ -74,7 +83,8 @@ namespace LElWPF.Core.ViewModels
                 Set(ref _StartIndex, DB.StartIndex);
                 if(value > EndIndex)
                     EndIndex = DB.EndIndex;
-                RandomValues = DB.GetRandomValues();
+                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues();
+                Status = DB.Index.ToString();
             }
         }
 
@@ -91,7 +101,8 @@ namespace LElWPF.Core.ViewModels
                 Set(ref _EndIndex, DB.EndIndex);
                 if (value < StartIndex)
                     StartIndex = DB.StartIndex;
-                RandomValues = DB.GetRandomValues();
+                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues();
+                Status = DB.Index.ToString();
             }
         }
 

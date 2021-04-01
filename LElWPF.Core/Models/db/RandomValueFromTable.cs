@@ -13,6 +13,7 @@ namespace LElWPF.Core.Models.db
         string NameDB { get; set; }
         public bool Accidentally { get; set; } = true;
         int random;
+        public int Index { get => random; }
         public int PandomInt { get => random; private set => random = value; }
         string nameTable;
         public string NameTable
@@ -133,7 +134,7 @@ namespace LElWPF.Core.Models.db
         }
         public Values GetNextValues()
         {
-            random = random + 1 <= EndIndex ? random + 1 : StartIndex;
+            random = random + 1 <= EndIndex ? random < StartIndex? StartIndex : random+1: StartIndex;
             return GetValues(random);
         }
         Values GetValues(int inex)
