@@ -1,0 +1,94 @@
+﻿<Window x:Class="LElWPF.Core.Views.Windows.DatabaseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LElWPF.Core.Views.Windows"
+        xmlns:vmDB="clr-namespace:LElWPF.Core.ViewModels.DatabaseWindow"
+        mc:Ignorable="d"
+        Title="DatabaseWindow" Height="500" Width="800">
+    <Window.DataContext>
+        <vmDB:DatabaseWindowViewModel/>
+    </Window.DataContext>
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0" Header="Tables" >
+            <DockPanel>
+                <UniformGrid DockPanel.Dock="Bottom" Columns="1" Height="110" Margin="0,60,0,0">
+                    <TextBox  Text="{Binding NameNewTable, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,11" />
+                    <DockPanel>
+                        <UniformGrid Rows="1" Height="41">
+                            <Button Content="Add new table" Command="{Binding AddNewTableCommand}" Height="30" Margin="0,0,5,0"/>
+                            <Button Content="Delete table" Command="{Binding DeleteTableCommand}"  Height="30" Margin="5,0,0,0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                    
+                    <DockPanel>
+                        <UniformGrid Rows="1" >
+                            <Button Content="Save tables" Command="{Binding SaveTablesCommand}" Height="30" Margin="0,0,5,0"/>
+                            <Button Content="Save all table" Command="{Binding SaveAllTablesCommand}"  Height="30" Margin="5,0,0,0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                </UniformGrid>
+                <ListBox ItemsSource="{Binding AllDB.AllTables}" 
+                     DisplayMemberPath="NameTable"
+                     SelectedItem="{Binding SelectedTable}"
+                     SelectedIndex="0"/>
+                        
+            </DockPanel>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Grid.RowSpan="2" Header="{Binding SelectedTable.NameTable, FallbackValue='Values', TargetNullValue='Таблица не выбрана'}">
+            <DockPanel>
+                <UniformGrid DockPanel.Dock="Bottom" Columns="1" Height="150" Margin="0,20,0,0">
+                    <DockPanel>
+                        <UniformGrid DockPanel.Dock="Top" Columns="1" Height="88" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <UniformGrid DockPanel.Dock="Top"  Grid.Column="0" Columns="1"  >
+                                    <TextBlock Height="20" Text="English word"/>
+                                    <TextBlock Height="20" Text="Transcription"/>
+                                    <TextBlock  Height="20" Text="Translation"/>
+                                </UniformGrid>
+                                <UniformGrid DockPanel.Dock="Top"  Grid.Column="1" Columns="1" Height="88" >
+                                    <TextBox Height="23" 
+                                     Text="{Binding AddValueTemp.Eng, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"  />
+                                    <TextBox Height="23" 
+                                     Text="{Binding AddValueTemp.EngTranscription, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+                                    <TextBox  Height="23" 
+                                     Text="{Binding AddValueTemp.Rus, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,5"/>
+                                </UniformGrid>
+                            </Grid>
+                        </UniformGrid>
+
+                        <UniformGrid DockPanel.Dock="Bottom" Columns="2" Margin="100,25,0,5">
+                            <Button Grid.Row="2" Content="Add value" Command="{Binding AddValuesCommand}" Margin="0,0,25,0" />
+                            <Button Grid.Row="2" Content="Delete value" Command="{Binding DeleteValueCommand}"  Margin="25,0,0,0"/>
+                        </UniformGrid>
+                    </DockPanel>
+                </UniformGrid>
+                <UniformGrid DockPanel.Dock="Bottom">
+                </UniformGrid>
+                <DataGrid ItemsSource="{Binding SelectedTable.Values, UpdateSourceTrigger=PropertyChanged}"                     
+                                  AutoGenerateColumns="False"
+                                  CanUserAddRows="False"
+                                  GridLinesVisibility="Vertical"
+                                  VerticalGridLinesBrush="DarkGray"
+                                  AlternatingRowBackground="LightGray" 
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding SelectedValue}">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="English" Binding="{Binding Eng , UpdateSourceTrigger=PropertyChanged }" IsReadOnly="False"  Width="1*"/>
+                        <DataGridTextColumn Header="Transcription" Binding="{Binding EngTranscription , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="1*" />
+                        <DataGridTextColumn Header="Translation" Binding="{Binding Rus , UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Width="1*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </GroupBox>
+    </Grid>
+</Window>

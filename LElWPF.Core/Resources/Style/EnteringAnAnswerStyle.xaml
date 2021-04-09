@@ -7,6 +7,8 @@
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="MaxLines" Value="1"/>
+            <Setter Property="MaxLength" Value="40"/>
         </Style.Setters>
     </Style>
     <Style x:Key="EnteringAnAnswerBorder" TargetType="Border">

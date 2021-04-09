@@ -1,24 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LElWPF.Core.Models
+﻿namespace LElWPF.Core.Models
 {
     class Values
     {
-        public string Rus { get; private set; }
-        public string Eng { get; private set; }
-        public string EngTranscription { get; private set; }
-        public string Song { get; private set; }
-        public string Img { get; private set; }
+        public string Rus { get; set; }
+        public string Eng { get; set; }
+        public string EngTranscription { get; set; }
+        public string Song { get;  set; }
+        public string Img { get; set; }
+        public string Help { get => Eng + " " + EngTranscription;  }
 
-        public Values(string wordRus, string wordEng, string transcription, PathToMultimedia paths)
+        
+        
+        public Values(string wordEng, string transcription, string wordRus,  string path)
         {
             Rus = wordRus;
             Eng = wordEng;
-            Song = paths.PathSong;
-            Img = paths.PathImg;
+            Song =path + $@"data\pronunciation_en_{wordEng.ToLower().Replace(' ','_').Replace('!', '_').Replace('?', '_')}.mp3";
+            Img =path + $@"data\{wordEng.ToLower().Replace('!', '_').Replace('?', '_')}.jpg";
             EngTranscription = transcription;
+        }
+        public Values(string wordEng, string transcription, string wordRus)
+        {
+            Rus = wordRus;
+            Eng = wordEng;
+            EngTranscription = transcription;
+        }
+        public Values()
+        {
+            
         }
     }
 }

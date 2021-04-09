@@ -7,22 +7,43 @@
             <Setter Property="Background" Value="#FFC7C6C6"></Setter>
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Background" Value="White" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="Padding" Value="20,5" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="TextBlock.TextAlignment" Value="Center" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="3" Background="#FFFBF9F9" BorderBrush="#FF131313" BorderThickness="1" >
+                        <Border CornerRadius="3"  BorderBrush="#FF131313" BorderThickness="1" >
                             <ContentPresenter x:Name="contentPresenter" 
                                               ContentTemplate="{TemplateBinding ContentTemplate}" 
                                               Content="{TemplateBinding Content}" 
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                               Margin="{TemplateBinding Padding}" 
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    
+                                        <Style.Triggers >
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="Opacity" Value="1"></Setter>
+                                            <Setter Property="Background" Value="#FFFBF9F9"></Setter>
+
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Opacity" Value="0.7"></Setter>
+                                            <Setter Property="Background" Value="#FFC8C9E6"></Setter>
+                                        </Trigger>
+                                        </Style.Triggers>
+                                    
+                                </Style>
+                            </Border.Style>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style.Setters>
+        
     </Style>
 </ResourceDictionary>

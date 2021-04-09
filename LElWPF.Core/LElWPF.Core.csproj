@@ -4,6 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>Learning English language</AssemblyName>
+    <ApplicationIcon>united_kingdom_flag.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,14 +16,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Data\image\Rectangle4.png" />
+    <None Remove="Data\image\301736-200.png" />
+    <None Remove="Data\image\sound.png" />
+    <None Remove="Views\Windows\301736-200.png" />
     <None Remove="Views\Windows\help.svg" />
-    <None Remove="Views\Windows\sound.png" />
+    <None Remove="Views\Windows\jpg-512.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Data\image\Rectangle4.png" />
-    <Resource Include="Resources\img\sound.png" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +38,16 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\image\sound.png" />
+    <Resource Include="Data\image\301736-200.png" />
+    <Resource Include="Data\image\jpg-512.png" />
   </ItemGroup>
 
 </Project>
