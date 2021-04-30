@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace LElWPF.Core.Models.AddWordsFromFile
 {
-    static class  AddFRomWordFromFiele
+    static class AddFRomWordFromFiele
     {
         internal static void AddListWordFromFile(string FullPathtoFail, string tableName, string fullPathToDB)
         {
@@ -17,9 +17,7 @@ namespace LElWPF.Core.Models.AddWordsFromFile
             string s;
             while ((s = sr.ReadLine()) != null)
             {
-                if (s == "")
-                    continue;
-                else
+                if (s != string.Empty)
                 {
                     values.Add(new WordS(s, sr.ReadLine()));
                 }
@@ -71,7 +69,7 @@ namespace LElWPF.Core.Models.AddWordsFromFile
                     transaction.Commit();
                 }
                 db.Close();
-                MessageBox.Show( "Added word\n" + exseption   );
+                MessageBox.Show("Added word\n" + exseption);
             }
         }
     }

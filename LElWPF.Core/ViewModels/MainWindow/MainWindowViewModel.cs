@@ -8,10 +8,11 @@ namespace LElWPF.Core.ViewModels
 {
     partial class MainWindowViewModel : ViewModel
     {
-   
+
         public MainWindowViewModel()
         {
-            StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
+            //StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
+            StaticPath = @"D:\Learning English language\";
             StaticName = "data.db";
             FileFound = File.Exists(StaticPath + StaticName);
             Status = StaticPath;
@@ -19,14 +20,17 @@ namespace LElWPF.Core.ViewModels
             {
                 if (FileFound)
                 {
-                    DB = new RandomValueFromTable(StaticPath , StaticName);
-                    RandomValues = DB.GetNextValues();
-                    Status = DB.Index.ToString();
-                    NamesTable = DB.NamesTable;
+                    DB = new RandomValueFromTable(StaticPath, StaticName);
+                    if (DB.MaxEndIndex != 0)
+                    {
+                        RandomValues = DB.GetNextValues();
+                        Status = DB.Index.ToString();
+                        NamesTable = DB.NamesTable;
+                    }
                 }
                 else
                 {
-                    Status = System.AppDomain.CurrentDomain.BaseDirectory; 
+                    Status = System.AppDomain.CurrentDomain.BaseDirectory;
                 }
             }
             catch (System.Exception ex)

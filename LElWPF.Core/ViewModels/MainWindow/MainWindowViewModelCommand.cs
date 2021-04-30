@@ -23,9 +23,6 @@ namespace LElWPF.Core.ViewModels
         
         #endregion
 
-
-
-
         #region AccidentallyCommand
 
         public ICommand AccidentallyCommand { get; }
@@ -37,9 +34,6 @@ namespace LElWPF.Core.ViewModels
         }
         
         #endregion
-
-
-
 
         #region DoNotCheckAnswersCommand
 
@@ -130,7 +124,7 @@ namespace LElWPF.Core.ViewModels
         {
             try
             {
-                if (dialogService.OpenFileDialog() == true)
+                if (dialogService.OpenFileDialog())
                 {
                     try
                     {

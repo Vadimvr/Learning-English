@@ -23,8 +23,8 @@ namespace LElWPF.Core.Models.db
             {
                 nameTable = value;
                 GetCountDB();
-                EndIndex = maxEndIndex;
-                StartIndex = 1;
+                //EndIndex = maxEndIndex;
+                //StartIndex = 1;
             }
         }
         public ObservableCollection<string> NamesTable { get; set; }
@@ -32,6 +32,7 @@ namespace LElWPF.Core.Models.db
         int startIndex = 1;
         public int StartIndex
         {
+
             get => startIndex;
             set
             {
@@ -54,6 +55,7 @@ namespace LElWPF.Core.Models.db
         }
 
         int maxEndIndex;
+        public int MaxEndIndex { get => maxEndIndex; }
         int endIndex;
         public int EndIndex
         {
@@ -86,9 +88,18 @@ namespace LElWPF.Core.Models.db
             NameDB = dbname;
             ReceivingDataFromSQlite receivingDataFromSQlite = new ReceivingDataFromSQlite(PathDB, NameDB);
             NamesTable = new ObservableCollection<string>(receivingDataFromSQlite.GetTablesNames());
-            NameTable = NamesTable[0];
-            GetCountDB();
-            StartIndex = 1;
+            try
+            {
+                NameTable = NamesTable[0];
+                //  GetCountDB();
+                if (maxEndIndex != 0)
+                    StartIndex = 1;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Db error");
+            }
+
         }
         public RandomValueFromTable(string nameTAble)
         {
@@ -109,7 +120,14 @@ namespace LElWPF.Core.Models.db
                     query.Read();
                     maxEndIndex = 0;
                     int.TryParse(query.GetString(0).ToString(), out maxEndIndex);
-                    EndIndex = maxEndIndex;
+                    if (maxEndIndex != 0)
+                    {
+                        EndIndex = maxEndIndex;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error in db");
+                    }
                     db.Close();
                 }
             }
@@ -134,7 +152,7 @@ namespace LElWPF.Core.Models.db
         }
         public Values GetNextValues()
         {
-            random = random + 1 <= EndIndex ? random < StartIndex? StartIndex : random+1: StartIndex;
+            random = random + 1 <= EndIndex ? random < StartIndex ? StartIndex : random + 1 : StartIndex;
             return GetValues(random);
         }
         Values GetValues(int inex)

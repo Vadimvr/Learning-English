@@ -92,7 +92,7 @@
                 <MenuItem Header="Open dictionary" 
                           Style="{StaticResource MenuItemStyle}" 
                           Command="{Binding OpenDictionaryCommand}"/>
-                <MenuItem Header="Сreate a dictionary" 
+                <MenuItem Header="Change the dictionary" 
                           Style="{StaticResource MenuItemStyle}"
                           Command="{Binding OpenDatabaseWindowCommand}"/>
 
