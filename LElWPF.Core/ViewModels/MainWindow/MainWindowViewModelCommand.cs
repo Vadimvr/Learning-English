@@ -186,7 +186,7 @@ namespace LElWPF.Core.ViewModels
         private void OnClickButtonCheckCommandExecuted(object p)
         {
 
-            if (FirstRun == true)
+            if (FirstRun)
             {
                 ButtonHelpVisibility = Visibility.Visible;
                 FirstStartApp = Visibility.Visible;

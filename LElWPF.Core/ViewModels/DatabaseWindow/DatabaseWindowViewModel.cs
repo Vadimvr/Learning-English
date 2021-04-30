@@ -15,7 +15,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 {
     class DatabaseWindowViewModel : ViewModel
     {
-        IDialogService dialogService = new DefaultDialogService();
+       readonly IDialogService dialogService = new DefaultDialogService();
 
         #region AllDB
 

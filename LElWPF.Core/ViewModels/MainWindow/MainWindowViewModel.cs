@@ -11,8 +11,8 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-            //StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
-            StaticPath = @"D:\Learning English language\";
+            StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
+            //StaticPath = @"D:\Learning English language\"; tets
             StaticName = "data.db";
             FileFound = File.Exists(StaticPath + StaticName);
             Status = StaticPath;

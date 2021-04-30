@@ -8,7 +8,7 @@ namespace LElWPF.Core.Models.db
 {
     class RandomValueFromTable
     {
-        Random rnd = new Random();
+        readonly Random rnd = new Random();
         string PathDB { get; set; }
         string NameDB { get; set; }
         public bool Accidentally { get; set; } = true;
@@ -23,8 +23,8 @@ namespace LElWPF.Core.Models.db
             {
                 nameTable = value;
                 GetCountDB();
-                //EndIndex = maxEndIndex;
-                //StartIndex = 1;
+                // * EndIndex = maxEndIndex;
+                // * StartIndex = 1;
             }
         }
         public ObservableCollection<string> NamesTable { get; set; }
@@ -152,7 +152,15 @@ namespace LElWPF.Core.Models.db
         }
         public Values GetNextValues()
         {
-            random = random + 1 <= EndIndex ? random < StartIndex ? StartIndex : random + 1 : StartIndex;
+            if (random + 1 <= EndIndex)
+            {
+                random = random < StartIndex ? StartIndex : random + 1;
+            }
+            else
+            {
+                random = startIndex;
+            }
+            //random = (random + 1 <= EndIndex) ? (random < StartIndex ? StartIndex : random + 1 ): StartIndex;
             return GetValues(random);
         }
         Values GetValues(int inex)
