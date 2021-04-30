@@ -10,7 +10,7 @@ namespace LElWPF.Core.Models.db
         public string NameTable { get; set; }
         public ObservableCollection<Values> Values { get; set; }
 
-         string Path { get; set; }
+        string Path { get; set; }
         string Name { get; set; }
         ReceivingDataFromSQlite СreationTable { get; set; }
         public TableInDB(string nameTable, List<Values> values, string path, string name, ReceivingDataFromSQlite сreationTableInDB)
@@ -30,7 +30,5 @@ namespace LElWPF.Core.Models.db
         {
             СreationTable.DeleteTable(NameTable);
         }
-        
-
     }
 }

@@ -29,17 +29,18 @@ namespace LElWPF.Core.Models.db
                     
                     var createTableCmd = db.CreateCommand();
                     createTableCmd.CommandText = $"CREATE TABLE '{nameTable}'(" +
-                            "'id'	INTEGER NOT NULL UNIQUE ," +
-                            "'eng'  VARCHAR(50) NOT NULL UNIQUE," +
-                            "'engt'  VARCHAR(50)," +
-                            "'rus'  VARCHAR(100) NOT NULL," +
+                            "'id' INTEGER NOT NULL UNIQUE ," +
+                            "'eng' VARCHAR(50) NOT NULL UNIQUE," +
+                            "'engt' VARCHAR(50)," +
+                            "'rus' VARCHAR(100) NOT NULL," +
                             "PRIMARY KEY('id' AUTOINCREMENT))";
                     createTableCmd.ExecuteNonQuery();
                     db.Close();
                 }
             }
-            catch
+            catch(Exception)
             {
+                Console.WriteLine("nanana");
             }
         }
 
@@ -58,6 +59,7 @@ namespace LElWPF.Core.Models.db
             }
             catch
             {
+                Console.WriteLine("nanana");
             }
         }
 

@@ -5,10 +5,18 @@ using System.Runtime.CompilerServices;
 
 namespace LElWPF.Core.ViewModels.Base
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3881:\"IDisposable\" should be implemented correctly", Justification = "<Pending>")]
     internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
-    {
-        public static string StaticPath = "";
-        public static string StaticName = "";
+    { 
+        private static string staticPath = "";
+        private static string staticName = "";
+
+#pragma warning disable S2696 // Instance members should not write to "static" fields
+        public string StaticPath { get => staticPath; set => staticPath = value; }
+        public string StaticName { get => staticName; set => staticName = value; }
+#pragma warning restore S2696 // Instance members should not write to "static" fields
+
+
         #region Property Changed
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,6 +41,8 @@ namespace LElWPF.Core.ViewModels.Base
             Dispose(true);
         }
         private bool _Disposed;
+
+
         protected virtual void Dispose(bool Disposing)
         {
             if (_Disposed || !Disposing) return;

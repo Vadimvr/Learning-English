@@ -52,8 +52,6 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-
-
         #region SelectedTable
 
         private string _SelectedTable;
@@ -107,14 +105,6 @@ namespace LElWPF.Core.ViewModels
         }
 
         #endregion
-
-
-
-
-
-
-
-
 
         #region Filed
 

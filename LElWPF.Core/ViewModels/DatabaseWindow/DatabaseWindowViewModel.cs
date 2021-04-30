@@ -8,17 +8,22 @@ using System.Windows.Input;
 using System.Windows;
 using LElWPF.Core.Infrastructure.Commands;
 using LElWPF.Core.Models;
+using LElWPF.Core.ViewModels.Windows;
+using LElWPF.Core.Models.AddWordsFromFile;
 
 namespace LElWPF.Core.ViewModels.DatabaseWindow
 {
     class DatabaseWindowViewModel : ViewModel
     {
+       readonly IDialogService dialogService = new DefaultDialogService();
+
         #region AllDB
 
         private FullBase _AllDB;
         public FullBase AllDB { get => _AllDB; set => Set(ref _AllDB, value); }
 
         #endregion
+
         #region SelectedItem
 
         private int _SelectedItem = 0;
@@ -26,6 +31,31 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
 
         #endregion
 
+        
+        #region AddFromFileCommand
+
+        public ICommand AddFromFileCommand { get; }
+
+        private bool CanAddFromFileCommandExecute(object p) => true;
+        private void OnAddFromFileCommandExecuted(object p)
+        {
+            if (dialogService.OpenFileDialog())
+            {
+                try
+                {
+                    string fileTextPath = dialogService.Path;
+                    string fileTextName= dialogService.File;
+                    AddFRomWordFromFiele.AddListWordFromFile(fileTextPath +  fileTextName, SelectedTable.NameTable, StaticPath + StaticName);
+                    AllDB = new FullBase(StaticPath, StaticName);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+       
+        #endregion
 
 
         #region SelectedTable
@@ -159,6 +189,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
             DeleteTableCommand = new LambdaCommand(OnDeleteTableCommandExecuted, CanDeleteTableCommandExecute);
             SaveTablesCommand = new LambdaCommand(OnSaveTablesCommandExecuted, CanSaveTablesCommandExecute);
             AddNewTableCommand = new LambdaCommand(OnAddNewTableCommandExecuted, CanAddNewTableCommandExecute);
+            AddFromFileCommand = new LambdaCommand(OnAddFromFileCommandExecuted, CanAddFromFileCommandExecute);
             AllDB = new FullBase(StaticPath, StaticName);
         }
     }
