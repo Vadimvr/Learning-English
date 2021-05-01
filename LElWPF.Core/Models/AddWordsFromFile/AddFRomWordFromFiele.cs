@@ -42,9 +42,9 @@ namespace LElWPF.Core.Models.AddWordsFromFile
                     delTableCmd.ExecuteNonQuery();
                     var createTableCmd = db.CreateCommand();
                     createTableCmd.CommandText = $"CREATE TABLE '{tableName}'(" +
-                            "'id' INTEGER NOT NULL UNIQUE ," +
-                            "'eng' VARCHAR(50) NOT NULL UNIQ" +
-                            " UE, " +
+                            "'id'	INTEGER NOT NULL UNIQUE ," +
+                            "'eng'  VARCHAR(50) NOT NULL UNIQ" +
+                            "UE," +
                             "'engt'  VARCHAR(50)," +
                             "'rus'  VARCHAR(100) NOT NULL," +
                             "PRIMARY KEY('id' AUTOINCREMENT))";
