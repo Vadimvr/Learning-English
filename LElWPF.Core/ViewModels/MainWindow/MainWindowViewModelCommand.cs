@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using LElWPF.Core.Views.Windows;
 using LElWPF.Core.Models.db;
+using LElWPF.Core.Models.pathFromDb;
 
 namespace LElWPF.Core.ViewModels
 {
@@ -136,6 +137,7 @@ namespace LElWPF.Core.ViewModels
 
                         FileFound = true;
                         Status = StaticName;
+                        PathFromDb.SavePath(StaticPath, StaticName);
                     }
                     catch (System.Exception ex)
                     {

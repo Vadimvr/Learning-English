@@ -9,8 +9,6 @@
         public string Img { get; set; }
         public string Help { get => Eng + " " + EngTranscription;  }
 
-        
-        
         public Values(string wordEng, string transcription, string wordRus,  string path)
         {
             Rus = wordRus;
