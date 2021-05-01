@@ -1,8 +1,9 @@
 ﻿using LElWPF.Core.Infrastructure.Commands;
 using LElWPF.Core.Models.db;
+using LElWPF.Core.Models.pathFromDb;
 using LElWPF.Core.ViewModels.Base;
-using LElWPF.Core.Views.Windows;
 using System.IO;
+
 
 namespace LElWPF.Core.ViewModels
 {
@@ -11,9 +12,14 @@ namespace LElWPF.Core.ViewModels
 
         public MainWindowViewModel()
         {
-            StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
-            //StaticPath = @"D:\Learning English language\"; tets
-            StaticName = "data.db";
+            //StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
+
+            ////StaticPath = @"D:\Learning English language\"; tets
+            //StaticName = "data.db";
+           
+            PathFromDb.GetPath();
+            StaticName = PathFromDb.Name;
+            StaticPath = PathFromDb.Path;
             FileFound = File.Exists(StaticPath + StaticName);
             Status = StaticPath;
             try

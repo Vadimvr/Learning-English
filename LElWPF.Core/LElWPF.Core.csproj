@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>Learning English language</AssemblyName>
     <ApplicationIcon>united_kingdom_flag.ico</ApplicationIcon>
+    <Authors>github.com/Vadimvr</Authors>
+    <Company>github.com/Vadimvr</Company>
+    <PackageIcon>icon msi.jpg</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>

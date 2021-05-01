@@ -1,8 +1,4 @@
 ﻿using LElWPF.Core.ViewModels.Base;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using LElWPF.Core.Models.db;
 using System.Windows.Input;
 using System.Windows;

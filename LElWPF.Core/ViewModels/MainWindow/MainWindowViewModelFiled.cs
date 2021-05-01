@@ -2,7 +2,6 @@
 using LElWPF.Core.Models.db;
 using LElWPF.Core.ViewModels.Base;
 using LElWPF.Core.ViewModels.Windows;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 
