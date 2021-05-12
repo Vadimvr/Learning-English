@@ -22,8 +22,6 @@ namespace LElWPF.Core.Models.db
             {
                 nameTable = value;
                 GetCountDB();
-                // * EndIndex = maxEndIndex;
-                // * StartIndex = 1;
             }
         }
         public ObservableCollection<string> NamesTable { get; set; }
@@ -90,7 +88,6 @@ namespace LElWPF.Core.Models.db
             try
             {
                 NameTable = NamesTable[0];
-                //  GetCountDB();
                 if (maxEndIndex != 0)
                     StartIndex = 1;
             }
@@ -159,7 +156,6 @@ namespace LElWPF.Core.Models.db
             {
                 random = startIndex;
             }
-            //random = (random + 1 <= EndIndex) ? (random < StartIndex ? StartIndex : random + 1 ): StartIndex;
             return GetValues(random);
         }
         Values GetValues(int inex)

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LElWPF.Core", "LElWPF.Core\LElWPF.Core.csproj", "{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2FBE61AD-AE32-4922-BDFE-71B5B28A0375}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7939F77F-4C93-43D9-9F01-42659E7FE059}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
@@ -22,10 +20,6 @@ Global
 		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC6771A-A2F4-4EB3-B3D7-6081BE021B50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2FBE61AD-AE32-4922-BDFE-71B5B28A0375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2FBE61AD-AE32-4922-BDFE-71B5B28A0375}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2FBE61AD-AE32-4922-BDFE-71B5B28A0375}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2FBE61AD-AE32-4922-BDFE-71B5B28A0375}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

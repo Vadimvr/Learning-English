@@ -5,8 +5,8 @@
         public string Rus { get; set; }
         public string Eng { get; set; }
         public string EngTranscription { get; set; }
-        public string Song { get;  set; }
-        public string Img { get; set; }
+        public string Song { get; private  set; }
+        public string Img { get; private set; }
         public string Help { get => Eng + " " + EngTranscription;  }
 
         public Values(string wordEng, string transcription, string wordRus,  string path)
@@ -23,9 +23,13 @@
             Eng = wordEng;
             EngTranscription = transcription;
         }
+        public Values(string wordEng,  string wordRus)
+        {
+            Rus = wordRus;
+            Eng = wordEng;
+        }
         public Values()
         {
-            
         }
     }
 }
