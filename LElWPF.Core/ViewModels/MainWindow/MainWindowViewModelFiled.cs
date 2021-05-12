@@ -74,14 +74,15 @@ namespace LElWPF.Core.ViewModels
         private int _StartIndex;
         public int StartIndex
         {
-            get => _StartIndex; set
+            get => _StartIndex;
+            set
             {
                 DB.StartIndex = value;
                 Set(ref _StartIndex, DB.StartIndex);
-                if(value > EndIndex)
-                    EndIndex = DB.EndIndex;
-                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues();
-                Status = DB.Index.ToString();
+                if (StartIndex > EndIndex)
+                {
+                    EndIndex = StartIndex;
+                }
             }
         }
 
@@ -92,14 +93,15 @@ namespace LElWPF.Core.ViewModels
         private int _EndIndex;
         public int EndIndex
         {
-            get => _EndIndex; set
+            get => _EndIndex;
+            set
             {
                 DB.EndIndex = value;
                 Set(ref _EndIndex, DB.EndIndex);
-                if (value < StartIndex)
-                    StartIndex = DB.StartIndex;
-                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues();
-                Status = DB.Index.ToString();
+                if (StartIndex > EndIndex)
+                {
+                    StartIndex = EndIndex;
+                }
             }
         }
 

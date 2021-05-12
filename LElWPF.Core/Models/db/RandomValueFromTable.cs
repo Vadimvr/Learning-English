@@ -22,8 +22,6 @@ namespace LElWPF.Core.Models.db
             {
                 nameTable = value;
                 GetCountDB();
-                // * EndIndex = maxEndIndex;
-                // * StartIndex = 1;
             }
         }
         public ObservableCollection<string> NamesTable { get; set; }

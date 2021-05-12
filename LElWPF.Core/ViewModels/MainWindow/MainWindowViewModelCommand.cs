@@ -90,7 +90,7 @@ namespace LElWPF.Core.ViewModels
 
         #endregion
 
-        #region NewNameCommand
+        #region NewNameCommandTets
 
         public ICommand NewNameCommand { get; }
 
@@ -197,6 +197,7 @@ namespace LElWPF.Core.ViewModels
                 mediaPlayer.Open(new Uri(RandomValues.Song));
                 mediaPlayer.Play();
                 Status = DB.Index.ToString();
+                EndIndex = DB.MaxEndIndex;
             }
 
             else
