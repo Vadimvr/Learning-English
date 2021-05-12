@@ -61,7 +61,7 @@ namespace LElWPF.Core.ViewModels
                 DB.NameTable = SelectedTable;
                 StartIndex = DB.StartIndex;
                 EndIndex = DB.EndIndex;
-                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues();
+                RandomValues = Accidentally ? DB.GetRandomValues() : DB.GetNextValues(true);
                 Status = DB.Index.ToString();
             }
         }
