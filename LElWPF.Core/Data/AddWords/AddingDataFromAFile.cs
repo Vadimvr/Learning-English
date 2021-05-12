@@ -7,22 +7,25 @@ using System.Windows;
 
 namespace LElWPF.Core.Models.AddWordsFromFile
 {
-    static class AddFRomWordFromFiele
+    static class AddingDataFromAFile
     {
-        internal static void AddListWordFromFile(string FullPathtoFail, string tableName, string fullPathToDB)
+        internal static void AddDataToTable(string FullPathToFail, string tableName, string fullPathToDB)
         {
             System.Text.StringBuilder exseption = new StringBuilder();
             List<Values> values = new List<Values>();
-            StreamReader sr = new StreamReader(FullPathtoFail);
-            string s;
-            while ((s = sr.ReadLine()) != null)
+            using (StreamReader sr = new StreamReader(FullPathToFail))
             {
-                if (s != string.Empty)
+                string s;
+                while ((s = sr.ReadLine()) != null)
                 {
-                    values.Add(new Values(s, sr.ReadLine()));
+                    if (s != string.Empty)
+                    {
+                        //rus c =>c o=>o e=>e a=>a
+                        values.Add(new Values(s.Trim().Replace('а','a').Replace('е', 'e').Replace('о', 'o').Replace('с', 'c'), sr.ReadLine().Trim()));
+                    }
                 }
             }
-            sr.Close();
+
             string path = fullPathToDB;
             using (SqliteConnection db = new SqliteConnection($"Filename={path}"))
             {
@@ -35,7 +38,7 @@ namespace LElWPF.Core.Models.AddWordsFromFile
                     SqliteDataReader query = selectCommand.ExecuteReader();
 #pragma warning restore S1481 // Unused local variables should be removed
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     var delTableCmd = db.CreateCommand();
                     delTableCmd.CommandText = $"DROP TABLE IF EXISTS '{tableName}'";

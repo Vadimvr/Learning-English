@@ -31,7 +31,6 @@ namespace LElWPF.Core.ViewModels
         IDialogService dialogService = new DefaultDialogService();
         public bool FileFound { get; set; } = false;
 
-
         private RandomValueFromTable _DB;
         public RandomValueFromTable DB { get => _DB; set => Set(ref _DB, value); }
 

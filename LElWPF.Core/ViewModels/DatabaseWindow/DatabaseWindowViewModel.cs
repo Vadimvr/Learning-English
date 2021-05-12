@@ -41,7 +41,7 @@ namespace LElWPF.Core.ViewModels.DatabaseWindow
                 {
                     string fileTextPath = dialogService.Path;
                     string fileTextName= dialogService.File;
-                    AddFRomWordFromFiele.AddListWordFromFile(fileTextPath +  fileTextName, SelectedTable.NameTable, StaticPath + StaticName);
+                    AddingDataFromAFile.AddDataToTable(fileTextPath +  fileTextName, SelectedTable.NameTable, StaticPath + StaticName);
                     AllDB = new FullBase(StaticPath, StaticName);
                 }
                 catch (System.Exception ex)
