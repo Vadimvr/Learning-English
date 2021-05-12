@@ -12,14 +12,14 @@ namespace LElWPF.Core.Models.AddWordsFromFile
         internal static void AddListWordFromFile(string FullPathtoFail, string tableName, string fullPathToDB)
         {
             System.Text.StringBuilder exseption = new StringBuilder();
-            List<WordS> values = new List<WordS>();
+            List<Values> values = new List<Values>();
             StreamReader sr = new StreamReader(FullPathtoFail);
             string s;
             while ((s = sr.ReadLine()) != null)
             {
                 if (s != string.Empty)
                 {
-                    values.Add(new WordS(s, sr.ReadLine()));
+                    values.Add(new Values(s, sr.ReadLine()));
                 }
             }
             sr.Close();

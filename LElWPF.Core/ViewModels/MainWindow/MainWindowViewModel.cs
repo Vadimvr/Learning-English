@@ -41,7 +41,7 @@ namespace LElWPF.Core.ViewModels
             }
             catch (System.Exception ex)
             {
-                Status = ex.Message;
+                Status = "Please open DateBase file";
             }
 
             ShowHintCommand = new LambdaCommand(OnShowHintCommandExecuted, CanShowHintCommandExecute);

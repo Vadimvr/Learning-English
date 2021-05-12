@@ -320,7 +320,7 @@
                     HorizontalAlignment="Left" Width="105"/>
                 <TextBox  Grid.Column="3"
                     Width="80" 
-                    Text="{Binding StartIndex, UpdateSourceTrigger=PropertyChanged}" 
+                    Text="{Binding StartIndex, UpdateSourceTrigger=LostFocus}" 
                     InputScope="Number" 
                     HorizontalAlignment="Left" TextAlignment="Center" FontSize="20" />
                 <Label  Grid.Column="4"
@@ -334,7 +334,7 @@
                     Grid.Column="5"
                     TextAlignment="Center" 
                           FontSize="20" 
-                    Text="{Binding EndIndex, UpdateSourceTrigger=PropertyChanged}" 
+                    Text="{Binding EndIndex, UpdateSourceTrigger=LostFocus}" 
                     InputScope="Number" />
             </Grid>
         </Border>

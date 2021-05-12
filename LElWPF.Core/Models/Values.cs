@@ -23,9 +23,13 @@
             Eng = wordEng;
             EngTranscription = transcription;
         }
+        public Values(string wordEng,  string wordRus)
+        {
+            Rus = wordRus;
+            Eng = wordEng;
+        }
         public Values()
         {
-            
         }
     }
 }
