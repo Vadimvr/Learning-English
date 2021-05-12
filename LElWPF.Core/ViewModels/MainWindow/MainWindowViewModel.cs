@@ -2,21 +2,22 @@
 using LElWPF.Core.Models.db;
 using LElWPF.Core.Models.pathFromDb;
 using LElWPF.Core.ViewModels.Base;
+using System;
 using System.IO;
 
 
 namespace LElWPF.Core.ViewModels
 {
+   
     partial class MainWindowViewModel : ViewModel
-    {
-
-        public MainWindowViewModel()
+    { 
+        public event EventHandler SetDbEventHandler;
+        public void SetDb(object sendler, EventArgs args)
         {
-            //StaticPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + @"\OneDrive\Documents\Learning English language\";
-
-            ////StaticPath = @"D:\Learning English language\"; tets
-            //StaticName = "data.db";
-           
+            SetDb();
+        }
+        public void SetDb()
+        {
             PathFromDb.GetPath();
             StaticName = PathFromDb.Name;
             StaticPath = PathFromDb.Path;
@@ -43,7 +44,11 @@ namespace LElWPF.Core.ViewModels
             {
                 Status = "Please open DateBase file";
             }
-
+        }
+        public MainWindowViewModel()
+        {
+            SetDb();
+            SetDbEventHandler += SetDb;
             ShowHintCommand = new LambdaCommand(OnShowHintCommandExecuted, CanShowHintCommandExecute);
             AccidentallyCommand = new LambdaCommand(OnAccidentallyCommandExecuted, CanAccidentallyCommandExecute);
             OpenSongLinkInBrowserCommand = new LambdaCommand(OnOpenSongLinkInBrowserCommandExecuted, CanOpenSongLinkInBrowserCommandExecute);

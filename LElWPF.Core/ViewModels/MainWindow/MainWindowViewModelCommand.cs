@@ -111,6 +111,7 @@ namespace LElWPF.Core.ViewModels
         {
 
             Views.Windows.DatabaseWindow databaseWindow = new Views.Windows.DatabaseWindow();
+            databaseWindow.Closed += this.SetDbEventHandler;
             databaseWindow.Show();
         }
 
