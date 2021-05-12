@@ -146,9 +146,9 @@ namespace LElWPF.Core.Models.db
             random = rnd.Next(StartIndex, EndIndex + 1);
             return GetValues(random);
         }
-        public Values GetNextValues()
+        public Values GetNextValues(bool chengeTable = false)
         {
-            if (random + 1 <= EndIndex)
+            if (random + 1 <= EndIndex && !chengeTable)
             {
                 random = random < StartIndex ? StartIndex : random + 1;
             }
